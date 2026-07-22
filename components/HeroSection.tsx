@@ -12,7 +12,6 @@ import {
   CpuChipIcon,
 } from "@heroicons/react/24/outline";
 
-// Card များအတွက် Data Type
 interface CardData {
   id: string;
   title: string;
@@ -21,43 +20,34 @@ interface CardData {
   positionClasses: string;
 }
 
-// Cards များကို Main Image ပတ်လည်တွင် နေရာချရန် Responsive Positioning ထည့်ထားသည်
 const serviceCards: CardData[] = [
   {
     id: "egov",
     title: "E-Government",
     subtitle: "CEIR & EIR Implementation",
     icon: <ShieldCheckIcon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
-    // Mobile တွင် Image ၏ အပေါ်ဘယ်ဘက်၊ Desktop တွင် ပိုကျယ်သွားမည်
-    positionClasses:
-      "top-0 left-0 sm:top-[0%] xl:top-[5%] xl:left-[-8%]",
+    positionClasses: "top-0 left-0 sm:top-[0%] xl:top-[5%] xl:left-[-8%]",
   },
   {
     id: "telecom",
     title: "Telecom Setup",
     subtitle: "Seamless Integration",
     icon: <SignalIcon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
-    // Mobile တွင် Image ၏ အောက်ဘယ်ဘက်
-    positionClasses:
-      "bottom-[0%] left-[0%]  xl:bottom-[15%] xl:left-[0%]",
+    positionClasses: "bottom-[0%] left-[0%]  xl:bottom-[15%] xl:left-[0%]",
   },
   {
     id: "it",
     title: "IT Infrastructure",
     subtitle: "Network & Security",
     icon: <ServerStackIcon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
-    // Mobile တွင် Image ၏ အပေါ်ညာဘက်
-    positionClasses:
-      "top-[0%] right-[0%]  xl:top-[15%] xl:right-[-8%]",
+    positionClasses: "top-[0%] right-[0%]  xl:top-[15%] xl:right-[-8%]",
   },
   {
     id: "ai",
     title: "AI Solutions",
     subtitle: "Data Center & Servers",
     icon: <CpuChipIcon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
-    // Mobile တွင် Image ၏ အောက်ညာဘက်
-    positionClasses:
-      "bottom-[0%] right-[0%]  xl:bottom-[25%] xl:right-[0%]",
+    positionClasses: "bottom-[0%] right-[0%]  xl:bottom-[25%] xl:right-[0%]",
   },
 ];
 
@@ -76,8 +66,6 @@ const FloatingCard: React.FC<FloatingCardProps> = ({
 }) => {
   return (
     <div
-      // နေရာသီးသန့်မယူဘဲ Image ပေါ်တွင်သာ ထပ်ပေါ်နေစေရန် Absolute သုံးထားသည်
-      // Mobile တွင် Size သေးသွားစေရန် w-[130px] မှစ၍ Responsive အဆင့်ဆင့်ရေးထားသည်
       className={`absolute flex flex-col gap-2 sm:gap-3 backdrop-blur-xl bg-white/80 
       p-2 sm:p-3 lg:p-5 rounded-xl sm:rounded-2xl border border-gray-200 hover:-translate-y-1 sm:hover:-translate-y-2 transition-all duration-500 z-20
       ${positionClasses}`}>
@@ -89,7 +77,6 @@ const FloatingCard: React.FC<FloatingCardProps> = ({
           <h3 className="text-gray-900 font-bold text-[10px] sm:text-xs lg:text-sm tracking-wide leading-tight truncate">
             {title}
           </h3>
-          {/* Subtitle ကို နေရာမလောက်ပါက Mobile တွင် ဖျောက်ထားနိုင်သည် (သို့) သေးပေးနိုင်သည် */}
           <p className="text-gray-500 text-[8px] sm:text-[10px] lg:text-xs mt-0.5 sm:mt-1 leading-tight truncate w-full">
             {subtitle}
           </p>
@@ -100,11 +87,16 @@ const FloatingCard: React.FC<FloatingCardProps> = ({
 };
 
 const HeroSection: React.FC = () => {
+  // Splash Screen ၏ App Reveal နှင့် အချိန်ကိုက်ဖြစ်ရန် Delay များ ထည့်သွင်းထားသည်
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+      transition: {
+        delay: 3.2, // Splash screen ပျောက်စပြုမည့် အချိန်အထိ စောင့်မည်
+        staggerChildren: 0.2,
+        delayChildren: 3.5, // Text များသည် ၃.၅ စက္ကန့်မှ စတင် Slide တက်လာမည်
+      },
     },
   };
 
@@ -118,11 +110,12 @@ const HeroSection: React.FC = () => {
   };
 
   const fadeInVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.95 },
+    hidden: { opacity: 0, scale: 0.9 },
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.8, ease: "easeOut" },
+      // ပုံနှင့် Floating Card များသည် Text များထက် နောက်ကျပြီးမှ (၄ စက္ကန့်တွင်) ပေါ်လာမည်
+      transition: { duration: 0.8, ease: "easeOut", delay: 4.0 },
     },
   };
 
@@ -131,12 +124,11 @@ const HeroSection: React.FC = () => {
       aria-label="Hero Section"
       id="home"
       className="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-16 ">
-      {/* <div className="absolute top-0 left-1/4 w-75 lg:w-125 h-75 lg:h-125 bg-blue-300/40 rounded-full blur-[80px] lg:blur-[120px] mix-blend-multiply pointer-events-none" /> */}
       <div className="absolute bottom-0 right-1/4 w-100 lg:w-150 h-100 lg:h-150 bg-indigo-300/30 rounded-full blur-[100px] lg:blur-[150px] mix-blend-multiply pointer-events-none" />
 
       <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-size-[32px_32px] sm:bg-size-[64px_64px] mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
-      <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -180,14 +172,12 @@ const HeroSection: React.FC = () => {
           </motion.div>
         </motion.div>
 
-        {/* Center Image နှင့် Mobile တွင်ပါ ပေါ်မည့် Floating Cards များ */}
+        {/* Center Image နှင့် Floating Cards များ (နောက်ကျပြီးမှ ထွက်ပေါ်လာမည်) */}
         <motion.div
           variants={fadeInVariants}
           initial="hidden"
           animate="visible"
-          // Mobile တွင် Image နှင့် Cards အားလုံး အလယ်တည့်တည့်တွင် နေရာယူစေရန် h-[300px] စသည်ဖြင့် ချိန်ထားသည်
           className="relative mt-12 sm:mt-16 h-[300px] sm:h-[450px]  w-full max-w-5xl mx-auto flex justify-center items-center">
-          {/* Main Center Image */}
           <div className="relative w-44 h-44 sm:w-72 sm:h-72 md:w-80 md:h-80 xl:w-100 xl:h-100 z-10 rounded-full bg-gradient-to-tr from-blue-100 to-indigo-50 p-1.5 sm:p-2 backdrop-blur-3xl border border-white shadow-2xl shadow-blue-900/10 animate-[spin_20s_linear_infinite]">
             <div className="w-full h-full rounded-full overflow-hidden relative bg-white flex items-center justify-center animate-[spin_20s_linear_infinite_reverse]">
               <Image
@@ -201,7 +191,6 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Floating Cards - နေရာသီးသန့်မယူဘဲ Image ပတ်လည်တွင်သာ Absolute ဖြင့် ကပ်နေမည် */}
           {serviceCards.map((card) => (
             <FloatingCard
               key={card.id}

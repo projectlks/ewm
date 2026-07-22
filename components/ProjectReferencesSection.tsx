@@ -75,7 +75,7 @@ export function ProjectReferencesSection(): React.JSX.Element {
           {projectsData.map((project: ProjectItem) => (
             <div
               key={project.id}
-              className="group relative flex flex-col p-8 md:p-10 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-blue-500/20 transition-all duration-300">
+              className="group relative flex flex-col p-8 md:p-10 bg-white rounded-3xl border border-gray-100 shadow-sm  hover:border-blue-500/20 transition-all duration-300">
               {/* Top Header: Icon & Status */}
               <div className="flex justify-between items-start mb-8">
                 <div className="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center border border-gray-100 group-hover:bg-blue-50/50 group-hover:scale-110 transition-all duration-300">
@@ -110,7 +110,8 @@ export function ProjectReferencesSection(): React.JSX.Element {
                 {project.tags.map((tag: ProjectTag, index: number) => (
                   <span
                     key={index}
-                    className="px-3 py-1.5 text-xs font-medium text-gray-600 bg-gray-50 rounded-lg border border-gray-100">
+                    // အပြာနုရောင် နောက်ခံနှင့် အပြာရင့်ရောင်စာသား အသုံးပြုထားသည်
+                    className="px-3 py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 rounded-lg border border-blue-100 hover:bg-blue-100 transition-colors cursor-default">
                     {tag.name}
                   </span>
                 ))}

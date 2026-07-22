@@ -24,3 +24,19 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+/* Scrollbar ကို လုံးဝ ဖျောက်ထားရန် (သို့သော် Scroll ဆွဲ၍ရမည်) */
+
+/* Chrome, Safari နှင့် Opera Browser များအတွက် */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox, IE နှင့် Edge Browser များအတွက် */
+body {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}

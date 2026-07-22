@@ -1,5 +1,9 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { motion, Variants } from "framer-motion";
 import {
   SignalIcon,
   ServerStackIcon,
@@ -8,7 +12,51 @@ import {
   CpuChipIcon,
 } from "@heroicons/react/24/outline";
 
-// TypeScript တွင် 'any' ကို လုံးဝ အသုံးမပြုဘဲ Interface များကို တိကျစွာ သတ်မှတ်ထားခြင်း
+// Card များအတွက် Data Type
+interface CardData {
+  id: string;
+  title: string;
+  subtitle: string;
+  icon: React.ReactNode;
+  positionClasses: string;
+}
+
+// Cards များကို Main Image ပတ်လည်တွင် နေရာချရန် Responsive Positioning ထည့်ထားသည်
+const serviceCards: CardData[] = [
+  {
+    id: "egov",
+    title: "E-Government",
+    subtitle: "CEIR & EIR Implementation",
+    icon: <ShieldCheckIcon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    // Mobile တွင် Image ၏ အပေါ်ဘယ်ဘက်၊ Desktop တွင် ပိုကျယ်သွားမည်
+    positionClasses: "top-0 left-0 sm:top-[0%] xl:top-[5%] xl:left-[-8%]",
+  },
+  {
+    id: "telecom",
+    title: "Telecom Setup",
+    subtitle: "Seamless Integration",
+    icon: <SignalIcon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    // Mobile တွင် Image ၏ အောက်ဘယ်ဘက်
+    positionClasses: "bottom-[0%] left-[0%]  xl:bottom-[15%] xl:left-[0%]",
+  },
+  {
+    id: "it",
+    title: "IT Infrastructure",
+    subtitle: "Network & Security",
+    icon: <ServerStackIcon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    // Mobile တွင် Image ၏ အပေါ်ညာဘက်
+    positionClasses: "top-[0%] right-[0%]  xl:top-[15%] xl:right-[-8%]",
+  },
+  {
+    id: "ai",
+    title: "AI Solutions",
+    subtitle: "Data Center & Servers",
+    icon: <CpuChipIcon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
+    // Mobile တွင် Image ၏ အောက်ညာဘက်
+    positionClasses: "bottom-[0%] right-[0%]  xl:bottom-[25%] xl:right-[0%]",
+  },
+];
+
 interface FloatingCardProps {
   title: string;
   subtitle: string;
@@ -24,14 +72,23 @@ const FloatingCard: React.FC<FloatingCardProps> = ({
 }) => {
   return (
     <div
-      className={`absolute hidden lg:flex flex-col gap-3 backdrop-blur-xl bg-white/70 border border-white/50 p-5 rounded-2xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500 z-20 ${positionClasses}`}>
-      <div className="flex items-center gap-4">
-        <div className="bg-blue-50 p-3 rounded-xl text-blue-600">{icon}</div>
-        <div>
-          <h3 className="text-gray-900 font-bold text-sm tracking-wide">
+      // နေရာသီးသန့်မယူဘဲ Image ပေါ်တွင်သာ ထပ်ပေါ်နေစေရန် Absolute သုံးထားသည်
+      // Mobile တွင် Size သေးသွားစေရန် w-[130px] မှစ၍ Responsive အဆင့်ဆင့်ရေးထားသည်
+      className={`absolute flex flex-col gap-2 sm:gap-3 backdrop-blur-xl bg-white/80 
+      p-2 sm:p-3 lg:p-5 rounded-xl sm:rounded-2xl border border-gray-200 hover:-translate-y-1 sm:hover:-translate-y-2 transition-all duration-500 z-20
+      ${positionClasses}`}>
+      <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
+        <div className="bg-blue-50 p-1.5 sm:p-2 lg:p-3 rounded-lg sm:rounded-xl text-blue-600 shrink-0 flex items-center justify-center">
+          {icon}
+        </div>
+        <div className="flex flex-col justify-center">
+          <h3 className="text-gray-900 font-bold text-[10px] sm:text-xs lg:text-sm tracking-wide leading-tight truncate">
             {title}
           </h3>
-          <p className="text-gray-500 text-xs mt-1">{subtitle}</p>
+          {/* Subtitle ကို နေရာမလောက်ပါက Mobile တွင် ဖျောက်ထားနိုင်သည် (သို့) သေးပေးနိုင်သည် */}
+          <p className="text-gray-500 text-[8px] sm:text-[10px] lg:text-xs mt-0.5 sm:mt-1 leading-tight truncate w-full">
+            {subtitle}
+          </p>
         </div>
       </div>
     </div>
@@ -39,116 +96,118 @@ const FloatingCard: React.FC<FloatingCardProps> = ({
 };
 
 const HeroSection: React.FC = () => {
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+    },
+  };
+
+  const slideUpVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
+  const fadeInVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
   return (
     <section
+      aria-label="Hero Section"
       id="home"
-      className="relative min-h-screen flex items-center justify-center  pt-20">
-      {/* Soft Light Glowing Backgrounds */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-300/40 rounded-full blur-[120px] mix-blend-multiply pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-indigo-300/30 rounded-full blur-[150px] mix-blend-multiply pointer-events-none" />
+      className="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-16 ">
+      {/* <div className="absolute top-0 left-1/4 w-75 lg:w-125 h-75 lg:h-125 bg-blue-300/40 rounded-full blur-[80px] lg:blur-[120px] mix-blend-multiply pointer-events-none" /> */}
+      <div className="absolute bottom-0 right-1/4 w-100 lg:w-150 h-100 lg:h-150 bg-indigo-300/30 rounded-full blur-[100px] lg:blur-[150px] mix-blend-multiply pointer-events-none" />
 
-      {/* Decorative Light Grid Lines */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-size-[32px_32px] sm:bg-size-[64px_64px] mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="flex flex-col items-center text-center">
-          {/* Main Typography - Light Mode Unique Layered Style */}
-          <div className="relative mb-6">
-            {/* <h2 className="text-transparent uppercase tracking-[0.5em] text-xs sm:text-sm font-bold bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-4 block">
-              EastWind Myanmar
-            </h2> */}
-
-            {/* စာလုံးအရွယ်အစားကို 4xl, 5xl, 6xl သို့ ပြောင်းလဲထားခြင်း */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight">
-              {/* ပထမစာကြောင်း (EMPOWERING MYANMAR'S) */}
-              <span className="text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-600 mr-3 sm:mr-4">
-                EMPOWERING
-              </span>
-              <span
-                className="text-transparent"
-                style={{ WebkitTextStroke: "2px rgba(21,93,252,0.5)" }}>
-                MYANMAR&apos;S
-              </span>
-
-              <br />
-
-              {/* ဒုတိယစာကြောင်း (DIGITAL FUTURE) */}
-              <span className="block mt-2 sm:mt-4 text-gray-900">
-                DIGITAL FUTURE
+      <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="flex flex-col items-center text-center">
+          <motion.div
+            variants={slideUpVariants}
+            className="relative mb-6 max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-[1.15]">
+              Empowering Myanmar&apos;s <br className="hidden sm:block" />
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-500">
+                Digital Future
               </span>
             </h1>
-          </div>
+          </motion.div>
 
-          {/* Paragraph ကို အနည်းငယ် သေးပေးထားခြင်း */}
-          <p className="max-w-2xl text-gray-600 text-sm sm:text-base font-light mb-10 leading-relaxed">
+          <motion.p
+            variants={slideUpVariants}
+            className="max-w-2xl text-gray-600 text-xs sm:text-sm md:text-base font-light mb-8 sm:mb-10 leading-relaxed px-2">
             Delivering highly interoperable systems, cutting-edge IT
             infrastructure, and robust E-government solutions tailored to drive
             progress across the nation.
-          </p>
+          </motion.p>
 
-          {/* Call to Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-30">
-            <button className="group relative px-5 py-2.5 sm:px-6 sm:py-3 bg-gray-900 text-white font-bold rounded-full overflow-hidden transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-gray-900/20">
+          <motion.div
+            variants={slideUpVariants}
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-30 w-full sm:w-auto px-4 sm:px-0">
+            <Link
+              href="/solutions"
+              className="group relative inline-flex items-center justify-center w-full sm:w-auto px-5 py-3 sm:px-6 sm:py-3 bg-gray-900 text-white font-bold rounded-full overflow-hidden transition-transform  active:scale-95 ">
               <span className="relative z-10 flex items-center gap-2 text-sm">
                 Explore Solutions
                 <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
-            </button>
-            <button className="px-5 py-2.5 sm:px-6 sm:py-3 rounded-full border border-gray-200 text-gray-700 font-medium hover:bg-white transition-colors backdrop-blur-sm bg-white/50 shadow-sm text-sm">
+            </Link>
+            <Link
+              href="/projects/ceir"
+              className="inline-flex items-center justify-center w-full sm:w-auto px-5 py-3 sm:px-6 sm:py-3 rounded-full border border-gray-200 text-gray-700 font-medium hover:bg-white transition-colors backdrop-blur-sm bg-white/50 shadow-sm text-sm">
               View CEIR Project
-            </button>
-          </div>
-        </div>
+            </Link>
+          </motion.div>
+        </motion.div>
 
-        {/* Unique Floating Tech Nodes & Center Image (Light Version) */}
-        <div className="relative mt-16 h-[350px] sm:h-[450px] w-full max-w-5xl mx-auto flex justify-center items-center">
+        {/* Center Image နှင့် Mobile တွင်ပါ ပေါ်မည့် Floating Cards များ */}
+        <motion.div
+          variants={fadeInVariants}
+          initial="hidden"
+          animate="visible"
+          // Mobile တွင် Image နှင့် Cards အားလုံး အလယ်တည့်တည့်တွင် နေရာယူစေရန် h-[300px] စသည်ဖြင့် ချိန်ထားသည်
+          className="relative mt-12 sm:mt-16 h-[300px] sm:h-[450px]  w-full max-w-5xl mx-auto flex justify-center items-center">
           {/* Main Center Image */}
-          <div className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 z-10 rounded-full bg-gradient-to-tr from-blue-100 to-indigo-50 p-2 backdrop-blur-3xl border border-white shadow-2xl shadow-blue-900/10 animate-[spin_20s_linear_infinite]">
+          <div className="relative w-44 h-44 sm:w-72 sm:h-72 md:w-80 md:h-80 xl:w-100 xl:h-100 z-10 rounded-full bg-gradient-to-tr from-blue-100 to-indigo-50 p-1.5 sm:p-2 backdrop-blur-3xl border border-white shadow-2xl shadow-blue-900/10 animate-[spin_20s_linear_infinite]">
             <div className="w-full h-full rounded-full overflow-hidden relative bg-white flex items-center justify-center animate-[spin_20s_linear_infinite_reverse]">
               <Image
-                src="/ai.png" // အလင်းရောင်နှင့် လိုက်ဖက်မည့် နည်းပညာပုံကို အသုံးပြုရန်
+                src="/ai.png"
                 alt="Technology Core Infrastructure"
                 fill
                 priority
                 className="object-cover transition-all duration-700"
-                sizes="(max-width: 768px) 256px, 320px"
+                sizes="(max-width: 768px) 176px, (max-width: 1280px) 320px, 400px"
               />
             </div>
           </div>
-          {/* Floating Cards - Positioned absolutely around the center image */}
 
-          {/* Top Left */}
-          <FloatingCard
-            title="E-Government"
-            subtitle="CEIR & EIR Implementation"
-            icon={<ShieldCheckIcon className="w-5 h-5 sm:w-6 sm:h-6" />}
-            positionClasses="top-[5%] left-[2%] xl:-left-[8%]"
-          />
-
-          {/* Bottom Left */}
-          <FloatingCard
-            title="Telecom Setup"
-            subtitle="Seamless Integration"
-            icon={<SignalIcon className="w-5 h-5 sm:w-6 sm:h-6" />}
-            positionClasses="bottom-[15%] left-[8%] xl:left-[0%]"
-          />
-
-          {/* Top Right */}
-          <FloatingCard
-            title="IT Infrastructure"
-            subtitle="Network & Security"
-            icon={<ServerStackIcon className="w-5 h-5 sm:w-6 sm:h-6" />}
-            positionClasses="top-[15%] right-[2%] xl:-right-[8%]"
-          />
-
-          {/* Bottom Right (AI Card အတွက် Icon ပြောင်းထားခြင်း) */}
-          <FloatingCard
-            title="AI"
-            subtitle="Data Center & Servers"
-            icon={<CpuChipIcon className="w-5 h-5 sm:w-6 sm:h-6" />}
-            positionClasses="bottom-[25%] right-[8%] xl:right-[0%]"
-          />
-        </div>
+          {/* Floating Cards - နေရာသီးသန့်မယူဘဲ Image ပတ်လည်တွင်သာ Absolute ဖြင့် ကပ်နေမည် */}
+          {serviceCards.map((card) => (
+            <FloatingCard
+              key={card.id}
+              title={card.title}
+              subtitle={card.subtitle}
+              icon={card.icon}
+              positionClasses={card.positionClasses}
+            />
+          ))}
+        </motion.div>
       </div>
     </section>
   );

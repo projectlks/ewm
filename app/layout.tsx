@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { SplashScreen } from "@/components/SplashScreen";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,8 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col  ">
+        {/* ဝဘ်ဆိုက်စဝင်ဝင်ချင်း တစ်ကြိမ်တည်းသာ အလုပ်လုပ်မည့် Splash Screen */}
+        <SplashScreen />
         <Navbar />
         <main className="container  mx-auto ">{children}</main>
       </body>
