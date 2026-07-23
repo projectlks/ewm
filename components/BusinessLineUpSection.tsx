@@ -105,7 +105,7 @@ export function BusinessLineUpSection(): React.JSX.Element {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-3">
             Business Line Up & Equipment Supply
           </h2>
           <p className="text-sm md:text-base text-gray-500 max-w-2xl mx-auto leading-relaxed">
@@ -128,7 +128,7 @@ export function BusinessLineUpSection(): React.JSX.Element {
               {/* Title */}
 
               {/* Title */}
-              <h3 className="text-lg font-bold text-gray-900 mb-5 tracking-tight   pb-3">
+              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-5 tracking-tight   pb-3">
                 {category.title}
               </h3>
 
@@ -139,11 +139,11 @@ export function BusinessLineUpSection(): React.JSX.Element {
                     <CheckCircleIcon className="w-5 h-5 text-blue-500 mr-3 mt-1 shrink-0" />
                     <div>
                       {/* ပစ္စည်းအမည် */}
-                      <div className="text-sm font-semibold text-gray-800 mb-0.5">
+                      <div className="text-sm sm:text-base font-semibold text-gray-800 mb-0.5">
                         {item.name}
                       </div>
                       {/* အသုံးဝင်ပုံ ရှင်းလင်းချက် */}
-                      <div className="text-xs text-gray-500 leading-relaxed">
+                      <div className="text-xs sm:text-sm text-gray-500 leading-relaxed">
                         {item.description}
                       </div>
                     </div>

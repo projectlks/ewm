@@ -1,170 +1,249 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import {
   ShieldCheckIcon,
   SignalIcon,
   ServerStackIcon,
   CpuChipIcon,
-  ArrowUpRightIcon,
 } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { div } from "framer-motion/client";
+import gsap from "gsap";
 
-// Bento Grid အတွက် Data Type
 interface BentoItem {
   id: string;
+  number: string;
   title: string;
   description: string;
   icon: React.ReactNode;
-  link: string;
-  spanClasses: string; // Grid အကွက် အကြီး/အသေး နေရာယူရန်
-  isDark?: boolean; // Dark Theme သုံးမည့် ကတ်အတွက်
+  spanClasses: string;
+  isDark?: boolean;
 }
 
 const bentoData: BentoItem[] = [
   {
     id: "egov",
+    number: "01",
     title: "E-Government & Interoperability",
     description:
       "Deploying robust nationwide systems like CEIR and EIR. We build secure, highly scalable platforms tailored for modern public administration.",
-    icon: <ShieldCheckIcon className="w-8 h-8 sm:w-10 sm:h-10" />,
-    link: "/solutions/e-government",
-    spanClasses: "md:col-span-2 md:row-span-1", // ကွန်ပျူတာတွင် ၂ ကွက်စာ နေရာယူမည်
+    icon: <ShieldCheckIcon />,
+    spanClasses: "lg:col-span-2",
   },
   {
     id: "telecom",
+    number: "02",
     title: "Telecom Setup",
     description:
-      "Seamless connectivity and infrastructure integration for telecommunication networks.",
-    icon: <SignalIcon className="w-8 h-8 sm:w-10 sm:h-10" />,
-    link: "/solutions/telecom",
-    spanClasses: "md:col-span-1 md:row-span-1", // ၁ ကွက်စာသာ နေရာယူမည်
+      "Seamless connectivity and infrastructure integration for advanced telecommunication networks.",
+    icon: <SignalIcon />,
+    spanClasses: "lg:col-span-1",
   },
   {
     id: "it",
+    number: "03",
     title: "IT Infrastructure",
     description:
-      "Modernizing businesses with cutting-edge network designs and security protocols.",
-    icon: <ServerStackIcon className="w-8 h-8 sm:w-10 sm:h-10" />,
-    link: "/solutions/it-infrastructure",
-    spanClasses: "md:col-span-1 md:row-span-1",
+      "Modernizing businesses with cutting-edge network designs and advanced security protocols.",
+    icon: <ServerStackIcon />,
+    spanClasses: "lg:col-span-1",
   },
   {
     id: "ai",
+    number: "04",
     title: "AI & Data Centers",
     description:
       "Driving innovation through Artificial Intelligence and high-performance server management to future-proof your operations.",
-    icon: <CpuChipIcon className="w-8 h-8 sm:w-10 sm:h-10" />,
-    link: "/solutions/ai",
-    spanClasses: "md:col-span-2 md:row-span-1",
-    isDark: true, // Apple Style Premium ဖြစ်စေရန် အမည်းရောင်ကတ် သုံးထားသည်
+    icon: <CpuChipIcon />,
+    spanClasses: "lg:col-span-2",
+    isDark: true,
   },
 ];
 
 const ServicesBento: React.FC = () => {
+  const activeCardRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    // 💡 Ticker အစား Scroll Event ကိုသာ ပြန်သုံးပါမည်
+    const handleScroll = () => {
+      if (activeCardRef.current) {
+        const cursor = document.getElementById("cursor");
+        // Locked ဖြစ်နေချိန် (Hover လုပ်ထားချိန်) တွင်သာ Scroll နောက်သို့ လိုက်စေမည်
+        if (cursor && cursor.classList.contains("locked")) {
+          const rect = activeCardRef.current.getBoundingClientRect();
+          gsap.set(cursor, {
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2,
+          });
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30, scale: 0.98 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] }, // Apple-like smooth cubic-bezier
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
   return (
-    // နောက်ခံကို အဖြူစစ်စစ် (White) ထက် အနည်းငယ်ဖျော့သော (#F5F5F7) Apple နောက်ခံမျိုး သုံးထားသည်
-    <section className="relative py-24 sm:py-32  overflow-hidden">
+    <section className="relative py-20 sm:py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Title */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={itemVariants}
-          className="mb-16 sm:mb-20 max-w-2xl">
-          <h2 className="text-3xl sm:text-5xl font-bold text-gray-900 tracking-tight leading-tight mb-4">
-            Core Infrastructure. <br />
-            <span className="text-gray-500">Built for scale.</span>
+          className="mb-12 max-w-2xl">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight leading-tight mb-4">
+            Core Infrastructure.
           </h2>
+          <p className="text-gray-500 text-sm md:text-base leading-relaxed">
+            Built for scale. We provide foundational technology solutions that
+            empower your digital transformation journey.
+          </p>
         </motion.div>
 
-        {/* Bento Grid */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           variants={containerVariants}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-          {bentoData.map((item) => (
+          className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+          {bentoData.map((item: BentoItem) => (
             <motion.div
               key={item.id}
               variants={itemVariants}
-              // rounded-2xl သို့ ပြောင်းလဲထားပြီး Padding များကို (p-5 sm:p-6 lg:p-8) သို့ လျှော့ချထားသည်
-              className={`group relative flex flex-col justify-between p-5 sm:p-6 lg:p-8 rounded-2xl overflow-hidden transition-all duration-300 border hover:border-blue-500 ${
+              onMouseEnter={(e) => {
+                const card = e.currentTarget as HTMLDivElement;
+                activeCardRef.current = card;
+
+                const cursor = document.getElementById("cursor");
+                if (cursor) {
+                  cursor.classList.add("locked");
+                  const rect = card.getBoundingClientRect();
+
+                  // 💡 x နှင့် y ကို ဤနေရာသို့ ပြန်ထည့်လိုက်ခြင်းဖြင့် Smooth Animation ပြန်ရသွားပါမည်
+                  gsap.to(cursor, {
+                    x: rect.left + rect.width / 2, // မူလအတိုင်း အလယ်ဗဟိုမှာပဲ ထားပါ
+                    y: rect.top + rect.height / 2, // မူလအတိုင်း အလယ်ဗဟိုမှာပဲ ထားပါ
+                    width: rect.width + 10, // ဘယ်/ညာ 5px စီ ပိုထွက်သွားမည်
+                    height: rect.height + 10, // အပေါ်/အောက် 5px စီ ပိုထွက်သွားမည်
+                    backgroundColor: "transparent",
+                    border: "1px solid white",
+                    borderRadius: "29px",
+                    duration: 0.3,
+                    ease: "power2.out",
+                  });
+                }
+              }}
+              onMouseLeave={(e) => {
+                activeCardRef.current = null;
+
+                const cursor = document.getElementById("cursor");
+                if (cursor) {
+                  // 💡 ဤနေရာတွင် cursor.classList.remove("locked"); ကို ချက်ချင်း မဖြုတ်တော့ပါ။
+
+                  gsap.to(cursor, {
+                    x: e.clientX, // Card အလယ်ကနေ Mouse ထွက်သွားတဲ့ နေရာဆီကို ချောချောမွေ့မွေ့ ပြန်ရွှေ့ပေးမည်
+                    y: e.clientY,
+                    width: 20,
+                    height: 20,
+                    backgroundColor: "transparent",
+                    border: "1px solid white",
+                    borderRadius: "100%",
+                    duration: 0.3,
+                    ease: "power2.out",
+                    onComplete: () => {
+                      // 💡 Animation ပြီးသွားမှသာ (ကတ်အရွယ်အစားမှ သေးသွားပြီးမှသာ) Mouse နောက်လိုက်ရန် locked ကို ဖြုတ်ပါမည်
+                      cursor.classList.remove("locked");
+                    },
+                  });
+                }
+              }}
+              className={`group relative flex rounded-[1.5rem] overflow-hidden transition-all duration-300 border hover:shadow-xl ${
                 item.spanClasses
               } ${
                 item.isDark
-                  ? "bg-gray-900 text-white border-gray-800"
-                  : "bg-white text-gray-900 shadow-sm border-gray-100"
+                  ? "bg-[#0B1121] border-gray-800 text-white shadow-lg shadow-blue-900/10"
+                  : "bg-white border-gray-200 text-gray-900 shadow-md shadow-gray-200/50"
               }`}>
-              {/* Decorative Background Glow (Dark ကတ်အတွက်သာ) */}
-              {item.isDark && (
-                <div className="absolute -bottom-20 -right-20 w-48 h-48 sm:w-64 sm:h-64 bg-blue-600/30 blur-[60px] rounded-full pointer-events-none transition-transform duration-700 group-hover:scale-150" />
-              )}
+              {item.spanClasses === "lg:col-span-2" ? (
+                <div className="flex flex-col md:flex-row w-full p-6 sm:p-8 gap-6 md:items-center pointer-events-none">
+                  <div className="flex-1 flex flex-col justify-center z-10">
+                    <span
+                      className={`text-xs font-bold tracking-widest mb-3 block ${
+                        item.isDark ? "text-blue-500" : "text-blue-600"
+                      }`}>
+                      {item.number} —
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-extrabold mb-3 tracking-tight leading-tight">
+                      {item.title}
+                    </h3>
+                    <p
+                      className={`text-xs sm:text-sm leading-relaxed max-w-md ${
+                        item.isDark ? "text-gray-400" : "text-gray-500"
+                      }`}>
+                      {item.description}
+                    </p>
+                  </div>
 
-              {/* အပေါ်ပိုင်း: Icon နှင့် Arrow Button */}
-              <div className="relative z-10 flex justify-between items-start mb-8 sm:mb-10">
-                {/* Icon (Icon အခံ အကွက်ကိုလည်း အနည်းငယ် သေးပေးထားသည်) */}
-                <div
-                  className={`inline-flex p-2.5 sm:p-3 rounded-xl ${
-                    item.isDark
-                      ? "bg-white/10 text-blue-400"
-                      : "bg-blue-50 text-blue-600"
-                  }`}>
-                  {item.icon}
+                  <div className="hidden md:flex flex-shrink-0 items-center justify-center relative">
+                    <div
+                      className={`w-32 h-32 sm:w-40 sm:h-40 rounded-full flex items-center justify-center transition-transform duration-700 group-hover:scale-105 ${
+                        item.isDark
+                          ? "bg-white/5 border border-white/10"
+                          : "bg-blue-50/50 border border-blue-100"
+                      }`}>
+                      {item.isDark && (
+                        <div className="absolute inset-0 bg-blue-500/20 blur-2xl rounded-full" />
+                      )}
+                      <div
+                        className={`w-16 h-16 sm:w-20 sm:h-20 relative z-10 ${
+                          item.isDark ? "text-blue-400" : "text-blue-600"
+                        } [&>svg]:stroke-1`}>
+                        {item.icon}
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              ) : (
+                <div className="flex flex-col h-full w-full p-6 sm:p-8 pointer-events-none">
+                  <div className="flex justify-between items-start mb-6 z-10">
+                    <span className="text-xs font-bold tracking-widest text-blue-600">
+                      {item.number} —
+                    </span>
+                    <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white text-blue-600 border border-blue-100">
+                      <div className="w-5 h-5 [&>svg]:stroke-[1.5]">
+                        {item.icon}
+                      </div>
+                    </div>
+                  </div>
 
-                {/* Link Arrow Button (အရွယ်အစားကို w-12 မှ w-8/w-10 သို့ လျှော့ချထားသည်) */}
-                <Link
-                  href={item.link}
-                  className={`shrink-0 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full transition-all duration-300 ${
-                    item.isDark
-                      ? "bg-white/10 hover:bg-white/20 text-white"
-                      : "bg-gray-50 hover:bg-blue-50 text-gray-400 hover:text-blue-600"
-                  }`}
-                  aria-label={`Learn more about ${item.title}`}>
-                  <ArrowUpRightIcon className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
-                </Link>
-              </div>
-
-              {/* အောက်ပိုင်း: Text Content */}
-              <div className="relative z-10 mt-auto">
-                {/* Title ကို text-3xl မှ text-lg/xl/2xl သို့ လျှော့ချထားသည် */}
-                <h3
-                  className={`text-lg sm:text-xl lg:text-2xl font-bold mb-2 tracking-tight ${
-                    item.isDark ? "text-white" : "text-gray-900"
-                  }`}>
-                  {item.title}
-                </h3>
-                {/* Description ကို text-base မှ text-xs/sm သို့ လျှော့ချထားသည် */}
-                <p
-                  className={`text-xs sm:text-sm leading-relaxed ${
-                    item.isDark ? "text-gray-400" : "text-gray-500"
-                  }`}>
-                  {item.description}
-                </p>
-              </div>
+                  <div className="z-10 mt-auto">
+                    <h3 className="text-lg sm:text-xl font-extrabold mb-2 tracking-tight leading-tight">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              )}
             </motion.div>
           ))}
         </motion.div>

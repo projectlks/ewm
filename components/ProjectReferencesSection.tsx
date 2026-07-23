@@ -59,7 +59,7 @@ export function ProjectReferencesSection(): React.JSX.Element {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-3">
             Featured Projects
           </h2>
           <p className="text-sm md:text-base text-gray-500 max-w-2xl mx-auto leading-relaxed">

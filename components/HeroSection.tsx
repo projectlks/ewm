@@ -1,9 +1,10 @@
-"use client";
+// "use client";
 
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
+import gsap from "gsap";
 import {
   SignalIcon,
   ServerStackIcon,
@@ -11,6 +12,7 @@ import {
   ArrowRightIcon,
   CpuChipIcon,
 } from "@heroicons/react/24/outline";
+import TextType from "./TextType";
 
 interface CardData {
   id: string;
@@ -67,7 +69,7 @@ const FloatingCard: React.FC<FloatingCardProps> = ({
   return (
     <div
       className={`absolute flex flex-col gap-2 sm:gap-3 backdrop-blur-xl bg-white/80 
-      p-2 sm:p-3 lg:p-5 rounded-xl sm:rounded-2xl border border-gray-200 hover:-translate-y-1 sm:hover:-translate-y-2 transition-all duration-500 z-20
+      p-2 sm:p-3 lg:p-5 rounded-xl sm:rounded-2xl border border-gray-200 hover:-translate-y-1  sm:hover:-translate-y-2 transition-all duration-500 z-20
       ${positionClasses}`}>
       <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
         <div className="bg-blue-50 p-1.5 sm:p-2 lg:p-3 rounded-lg sm:rounded-xl text-blue-600 shrink-0 flex items-center justify-center">
@@ -87,15 +89,15 @@ const FloatingCard: React.FC<FloatingCardProps> = ({
 };
 
 const HeroSection: React.FC = () => {
-  // Splash Screen ၏ App Reveal နှင့် အချိန်ကိုက်ဖြစ်ရန် Delay များ ထည့်သွင်းထားသည်
+  // 💡 မှတ်ချက်: မိတ်ဆွေ ပိတ်ထားသော Animation များကို ပြန်ဖွင့်ပေးထားပါသည်
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        delay: 3.2, // Splash screen ပျောက်စပြုမည့် အချိန်အထိ စောင့်မည်
+        delay: 3.2,
         staggerChildren: 0.2,
-        delayChildren: 3.5, // Text များသည် ၃.၅ စက္ကန့်မှ စတင် Slide တက်လာမည်
+        delayChildren: 3.5,
       },
     },
   };
@@ -114,7 +116,6 @@ const HeroSection: React.FC = () => {
     visible: {
       opacity: 1,
       scale: 1,
-      // ပုံနှင့် Floating Card များသည် Text များထက် နောက်ကျပြီးမှ (၄ စက္ကန့်တွင်) ပေါ်လာမည်
       transition: { duration: 0.8, ease: "easeOut", delay: 4.0 },
     },
   };
@@ -136,13 +137,35 @@ const HeroSection: React.FC = () => {
           className="flex flex-col items-center text-center">
           <motion.div
             variants={slideUpVariants}
-            className="relative mb-6 max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-[1.15]">
-              Empowering Myanmar&apos;s <br className="hidden sm:block" />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-500">
-                Digital Future
-              </span>
-            </h1>
+            className="relative mb-6 max-w-4xl mx-auto h-[120px] sm:h-[150px] lg:h-[200px] flex items-center justify-center">
+            {/* 💡 ဒီနေရာမှာ h1 အစား TextType ကို ထည့်သွင်းထားပါသည် */}
+            <TextType
+              as="h1" // h1 tag အဖြစ် rendering လုပ်ပေးမည်
+              text={[
+                "Empowering Myanmar's Digital Future",
+                "Delivering Robust E-Government Solutions",
+                "Building Cutting-Edge IT Infrastructure",
+              ]}
+              // typingSpeed={75}
+              // pauseDuration={1500}
+              // deletingSpeed={30}
+              // showCursor={true}
+              // cursorCharacter="_"
+
+              typingSpeed={75}
+              pauseDuration={1500}
+              showCursor
+              cursorCharacter="_"         
+              deletingSpeed={50}
+              // variableSpeedEnabled={false}
+              // variableSpeedMin={60}
+              // variableSpeedMax={120}
+              cursorBlinkDuration={0.5}
+              // Cursor လေးကို အပြာရောင်ဖြစ်အောင် ထည့်ထားပါသည်
+              cursorClassName="text-blue-600 font-light"
+              // မူလ h1 ၏ Class များကို ပြန်လည်ထည့်သွင်းထားပါသည်[cite: 10]
+              className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-[1.15]"
+            />
           </motion.div>
 
           <motion.p

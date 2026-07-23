@@ -1,18 +1,12 @@
-import React from "react";
-import {
-  UserGroupIcon,
-  LightBulbIcon,
-  ShieldCheckIcon,
-  GlobeAltIcon,
-  PuzzlePieceIcon,
-} from "@heroicons/react/24/outline";
+"use client"; // Interactive Animation (useState) သုံးထားသဖြင့် ထည့်ပေးရပါမည်
 
-// Typescript တွင် any အသုံးမပြုရန် Interface များကို တိကျစွာ သတ်မှတ်ထားပါသည်
+import React, { useState } from "react";
+
 interface CoreValue {
   id: string;
   title: string;
   description: string;
-  icon: React.ReactNode;
+  imageUrl: string;
 }
 
 const coreValuesData: CoreValue[] = [
@@ -21,45 +15,53 @@ const coreValuesData: CoreValue[] = [
     title: "Customer Focus",
     description:
       "We prioritize our clients' needs, ensuring satisfaction, trust, and long-term success through dedicated support.",
-    icon: <UserGroupIcon className="w-8 h-8 text-blue-600" />,
+    imageUrl:
+      "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: "innovation",
     title: "Innovation",
     description:
       "Embracing cutting-edge technology and forward-thinking strategies to deliver modern, efficient solutions.",
-    icon: <LightBulbIcon className="w-8 h-8 text-amber-500" />,
+    imageUrl:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: "integrity-quality",
     title: "Integrity & Quality",
     description:
       "Upholding the highest ethical standards while delivering premium, reliable, and standardized results.",
-    icon: <ShieldCheckIcon className="w-8 h-8 text-emerald-600" />,
+    imageUrl:
+      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: "sustainability",
     title: "Sustainability",
     description:
       "Committed to environmentally friendly practices, renewable energy, and the long-term viability of our projects.",
-    icon: <GlobeAltIcon className="w-8 h-8 text-teal-600" />,
+    imageUrl:
+      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: "interoperability",
     title: "Interoperability",
     description:
       "Designing systems and infrastructure that seamlessly integrate, communicate, and work together flawlessly.",
-    icon: <PuzzlePieceIcon className="w-8 h-8 text-indigo-600" />,
+    imageUrl:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
   },
 ];
 
 export function CoreValuesSection(): React.JSX.Element {
+  // ပထမဆုံး အကွက်ကို Default အနေဖြင့် ကျယ်နေစေရန် သတ်မှတ်ထားပါသည်
+  const [activeId, setActiveId] = useState<string>("customer-focus");
+
   return (
-    <section className="py-16 md:py-24 ">
+    <section className="py-20 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight mb-3">
+        <div className="text-center mb-12 md:mb-16 relative z-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-3">
             Our Core Values
           </h2>
           <p className="text-sm md:text-base text-gray-500 max-w-2xl mx-auto leading-relaxed">
@@ -69,31 +71,62 @@ export function CoreValuesSection(): React.JSX.Element {
         </div>
 
         {/* 
-          အချက် (၅) ချက်ကို အပေါ် (၃) ခု၊ အောက် (၂) ခု အချိုးကျကျ အလယ်တည့်တည့် (Center) 
-          တွင် ပေါ်စေရန် Flexbox ကို အသုံးပြု၍ နေရာချထားပါသည်
+          Interactive Expanding Layout
+          Mobile တွင် အပေါ်အောက်၊ Desktop တွင် ဘေးတိုက် ကျယ်လာမည့် ပုံစံဖြစ်ပါသည်
         */}
-        <div className="flex flex-wrap justify-center gap-6 md:gap-8">
-          {coreValuesData.map((value: CoreValue) => (
-            <div
-              key={value.id}
-              // Width ကို တွက်ချက်ထားခြင်း: Mobile (100%), Tablet (50%), Desktop (33.33%)
-              className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)] group relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-500 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
-              {/* Icon Container with subtle background hover effect */}
-              <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300">
-                {value.icon}
+        <div className="flex flex-col lg:flex-row gap-4 w-full h-[700px] lg:h-[500px]">
+          {coreValuesData.map((value) => {
+            const isActive = activeId === value.id;
+
+            return (
+              <div
+                key={value.id}
+                onMouseEnter={() => setActiveId(value.id)}
+                onClick={() => setActiveId(value.id)}
+                // Flex box ၏ flex-grow ကို အသုံးပြု၍ အကျယ်အဝန်းကို အသက်သွင်းထားပါသည်
+                className={`relative overflow-hidden rounded-[2rem] transition-all duration-700 ease-in-out cursor-pointer group flex flex-col justify-end
+                  ${isActive ? "flex-[5]" : "flex-[1]"}
+                `}>
+                {/* Background Image */}
+                <img
+                  src={value.imageUrl}
+                  alt={value.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+
+                {/* Dark Overlay - Active ဖြစ်လျှင် ပိုမိုက်စေရန် */}
+                <div
+                  className={`absolute inset-0 transition-all duration-700 
+                  ${isActive ? "bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent" : "bg-gray-900/50 group-hover:bg-gray-900/30"}`}></div>
+
+                {/* Content Area */}
+                <div className="relative z-10 p-5 md:p-8 flex flex-col justify-end h-full">
+                  {/* Number & Title */}
+                  <div className="flex items-center gap-4">
+                    {/* <span className="w-10 h-10 shrink-0 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white font-bold text-sm">
+                      0{index + 1}
+                    </span> */}
+                    <h3
+                      className={`text-xl md:text-2xl font-bold text-white whitespace-nowrap transition-all duration-700 ease-in-out
+                        ${isActive ? "opacity-100 translate-x-0 w-auto" : "opacity-0 translate-x-4 w-0 overflow-hidden"}
+                      `}>
+                      {value.title}
+                    </h3>
+                  </div>
+
+                  {/* Description - Active ဖြစ်မှသာ ပေါ်လာပါမည် */}
+                  <div
+                    className={`overflow-hidden transition-all duration-700 ease-in-out
+                      ${isActive ? "max-h-40 opacity-100 mt-3" : "max-h-0 opacity-0 mt-0"}
+                    `}>
+                    <p className="text-gray-200 text-sm md:text-[15px] leading-relaxed max-w-lg">
+                      {value.description}
+                    </p>
+                  </div>
+                </div>
               </div>
-
-              {/* Title */}
-              <h3 className="text-lg font-bold text-gray-900 mb-4 tracking-tight">
-                {value.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-sm text-gray-600 leading-relaxed">
-                {value.description}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

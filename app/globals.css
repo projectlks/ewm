@@ -8,8 +8,28 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* 
+    Body စာသားများအတွက် Inter ကို Default 'sans' အဖြစ် သတ်မှတ်ခြင်း 
+    (မလိုအပ်သော geist-sans ကို ဖယ်ရှားထားပါသည်)
+  */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Heading ခေါင်းစဉ်များအတွက် Plus Jakarta Sans ကို 'heading' အမည်ဖြင့် သီးသန့် သတ်မှတ်ခြင်း */
+  --font-heading: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* 
+  ဝဘ်ဆိုက်တစ်ခုလုံးရှိ ခေါင်းစဉ် (h1 မှ h6) အားလုံးကို 
+  Plus Jakarta Sans ဖောင့်အဖြစ် အလိုအလျောက် သတ်မှတ်ခြင်း 
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,7 +42,10 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* 
+    မှတ်ချက် - ဤနေရာတွင် ရှိနေသော font-family: Arial... ကို ဖြုတ်ပစ်လိုက်ပါပြီ။ 
+    ယခုဆိုလျှင် Tailwind မှ font-sans (Inter) ကို အလိုအလျောက် အသုံးပြုပါလိမ့်မည်။
+  */
 }
 
 

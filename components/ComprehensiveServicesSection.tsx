@@ -70,7 +70,7 @@ export function ComprehensiveServicesSection(): React.JSX.Element {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16 relative z-10">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-3">
             Comprehensive Services
           </h2>
           <p className="text-sm md:text-base text-gray-500 max-w-2xl mx-auto leading-relaxed">
@@ -120,7 +120,7 @@ export function ComprehensiveServicesSection(): React.JSX.Element {
                   {service.items.map((item: ServiceItem, index: number) => (
                     <li key={index} className="flex items-center text-gray-700">
                       <CheckCircleIcon className="w-5 h-5 text-blue-500 mr-3 shrink-0" />
-                      <span className="text-sm font-medium">{item.name}</span>
+                      <span className="text-sm  font-medium">{item.name}</span>
                     </li>
                   ))}
                 </ul>
