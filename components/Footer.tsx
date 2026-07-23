@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface FooterLink {
   name: string;
@@ -89,7 +90,11 @@ export function Footer(): React.JSX.Element {
       {/* Top Section */}
       <div className="mx-auto px-4 md:px-6 w-full mb-10 z-10">
         <div className="flex flex-col md:flex-row items-start justify-between gap-12">
-          <div className="lg:col-span-2">
+
+
+          <div className="">
+            {/* <Image src="/logo.png"  alt="logo" width={200} height={200} /> */}
+
             <p className="text-gray-400 font-sans text-sm md:text-base leading-relaxed max-w-sm pr-4">
               Empowering Myanmar&apos;s digital future through highly
               interoperable systems, cutting-edge IT infrastructure, and robust

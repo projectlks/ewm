@@ -1,8 +1,10 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
 
-import Image from 'next/image'; // Next.js Image ကို Import လုပ်ခြင်း
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface NavItem {
   name: string;
@@ -10,93 +12,153 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Products', href: '#products' },
-  { name: 'Support', href: '#support' },
-  { name: 'Career', href: '#career' },
-  { name: 'Contact Us', href: '#contact' },
+  { name: "Home", href: "#home" },
+  { name: "Solutions", href: "#solutions" },
+  { name: "Infrastructure", href: "#infrastructure" },
+  { name: "Projects", href: "#projects" },
+  { name: "Contact", href: "#contact" },
 ];
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
+
+  // Scroll ဆွဲသည့်အခါ Navbar နောက်ခံကို အရောင်ပြောင်းရန်
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleMobileMenu = (): void => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
-    <nav className="  top-0 left-0 w-full z-50 transition-all duration-300">
-      <div className="container mx-auto px-4 sm:px-0">
-        <div className="flex justify-between items-center h-20">
+    <header
+      className={`fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl  z-50 transition-all duration-300 ${
+        scrolled
+          ? " py-3"
+          : "bg-transparent py-5"
+      }`}>
+      <div className=" px-4 sm:px-6 backdrop-blur-2xl lg:px-8">
+        <div className="flex justify-between items-center">
           {/* Logo Section */}
-          <div className="shrink-0 flex items-center cursor-pointer">
-            {/* Next.js Image Component ကို အသုံးပြုထားခြင်း */}
+          <Link href="/" className="shrink-0 flex items-center group">
             <Image
-              src="/Eastwind.svg"
+              src="/l.png"
               alt="EastWind Myanmar Logo"
-              width={250}
-              height={80}
+              width={200}
+              height={40}
               priority
-              className="w-40 md:w-48 h-auto object-contain"
+              className="w-auto h-16 object-contain transition-transform duration-300 group-hover:scale-105"
             />
-          </div>
+          </Link>
+
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:space-x-8">
+          <nav className="hidden md:flex md:items-center space-x-1 lg:space-x-2">
             {navItems.map((item: NavItem) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">
+                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 rounded-full hover:bg-gray-100/80 transition-all duration-200">
                 {item.name}
-              </a>
+              </Link>
             ))}
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-medium transition-transform transform hover:scale-105 duration-200 shadow-md">
-              Get Started
-            </button>
+          </nav>
+
+          {/* Desktop CTA Button */}
+          <div className="hidden md:flex items-center">
+            <Link
+              href="#contact"
+              className="px-6 py-2.5 bg-gray-900 text-white text-sm font-semibold rounded-full hover:bg-blue-600 transition-colors duration-300 shadow-lg shadow-gray-900/20">
+              Get in touch
+            </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Toggle Button */}
           <div className="flex items-center md:hidden">
             <button
               type="button"
               onClick={toggleMobileMenu}
-              className="text-gray-600 hover:text-blue-600 focus:outline-none p-2"
+              className="p-2 -mr-2 text-gray-600 hover:text-gray-900 focus:outline-none"
               aria-expanded={isMobileMenuOpen}>
-              <span className="sr-only">Open main menu</span>
-              {isMobileMenuOpen ? (
-                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-              )}
+              <span className="sr-only">Toggle menu</span>
+              <AnimatePresence mode="wait">
+                {isMobileMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ opacity: 0, rotate: -90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: 90 }}
+                    transition={{ duration: 0.2 }}>
+                    <XMarkIcon className="h-7 w-7" aria-hidden="true" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ opacity: 0, rotate: 90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: -90 }}
+                    transition={{ duration: 0.2 }}>
+                    <Bars3Icon className="h-7 w-7" aria-hidden="true" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
-      <div
-        className={`md:hidden absolute w-full bg-white shadow-lg transition-all duration-300 ease-in-out origin-top ${
-          isMobileMenuOpen ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0"
-        }`}>
-        <div className="px-4 pt-2 pb-6 space-y-2 sm:px-3 flex flex-col">
-          {navItems.map((item: NavItem) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200"
-              onClick={() => setIsMobileMenuOpen(false)}>
-              {item.name}
-            </a>
-          ))}
-          <div className="pt-4 px-3">
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium shadow-md transition-colors duration-200">
-              Get Started
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
+      {/* Mobile Navigation (Framer Motion) */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden overflow-hidden bg-white/95 backdrop-blur-xl border-b border-gray-200 absolute top-full left-0 w-full shadow-xl">
+            <div className="px-4 pt-4 pb-8 space-y-1">
+              {navItems.map((item: NavItem, index) => (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-4 py-3.5 text-base font-semibold text-gray-800 hover:text-blue-600 hover:bg-blue-50/50 rounded-xl transition-colors duration-200">
+                    {item.name}
+                  </Link>
+                </motion.div>
+              ))}
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navItems.length * 0.1 }}
+                className="pt-6">
+                <Link
+                  href="#contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex w-full justify-center px-6 py-3.5 bg-gray-900 text-white text-base font-bold rounded-2xl hover:bg-blue-600 transition-colors shadow-lg">
+                  Get in touch
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 };
 

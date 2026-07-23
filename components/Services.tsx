@@ -123,58 +123,58 @@ const ServicesBento: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           variants={containerVariants}
+          onMouseEnter={(e) => {
+            const card = e.currentTarget as HTMLDivElement;
+            activeCardRef.current = card;
+
+            const cursor = document.getElementById("cursor");
+            if (cursor) {
+              cursor.classList.add("locked");
+              const rect = card.getBoundingClientRect();
+
+              // 💡 x နှင့် y ကို ဤနေရာသို့ ပြန်ထည့်လိုက်ခြင်းဖြင့် Smooth Animation ပြန်ရသွားပါမည်
+              gsap.to(cursor, {
+                x: rect.left + rect.width / 2, // မူလအတိုင်း အလယ်ဗဟိုမှာပဲ ထားပါ
+                y: rect.top + rect.height / 2, // မူလအတိုင်း အလယ်ဗဟိုမှာပဲ ထားပါ
+                width: rect.width + 20, // ဘယ်/ညာ 5px စီ ပိုထွက်သွားမည်
+                height: rect.height + 20, // အပေါ်/အောက် 5px စီ ပိုထွက်သွားမည်
+                backgroundColor: "transparent",
+                border: "1px solid gray",
+                borderRadius: "34px",
+                duration: 0.3,
+                ease: "power2.out",
+              });
+            }
+          }}
+          onMouseLeave={(e) => {
+            activeCardRef.current = null;
+
+            const cursor = document.getElementById("cursor");
+            if (cursor) {
+              // 💡 ဤနေရာတွင် cursor.classList.remove("locked"); ကို ချက်ချင်း မဖြုတ်တော့ပါ။
+
+              gsap.to(cursor, {
+                x: e.clientX, // Card အလယ်ကနေ Mouse ထွက်သွားတဲ့ နေရာဆီကို ချောချောမွေ့မွေ့ ပြန်ရွှေ့ပေးမည်
+                y: e.clientY,
+                width: 20,
+                height: 20,
+                backgroundColor: "transparent",
+                border: "1px solid white",
+                borderRadius: "100%",
+                duration: 0.3,
+                ease: "power2.out",
+                onComplete: () => {
+                  // 💡 Animation ပြီးသွားမှသာ (ကတ်အရွယ်အစားမှ သေးသွားပြီးမှသာ) Mouse နောက်လိုက်ရန် locked ကို ဖြုတ်ပါမည်
+                  cursor.classList.remove("locked");
+                },
+              });
+            }
+          }}
           className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           {bentoData.map((item: BentoItem) => (
             <motion.div
               key={item.id}
               variants={itemVariants}
-              onMouseEnter={(e) => {
-                const card = e.currentTarget as HTMLDivElement;
-                activeCardRef.current = card;
-
-                const cursor = document.getElementById("cursor");
-                if (cursor) {
-                  cursor.classList.add("locked");
-                  const rect = card.getBoundingClientRect();
-
-                  // 💡 x နှင့် y ကို ဤနေရာသို့ ပြန်ထည့်လိုက်ခြင်းဖြင့် Smooth Animation ပြန်ရသွားပါမည်
-                  gsap.to(cursor, {
-                    x: rect.left + rect.width / 2, // မူလအတိုင်း အလယ်ဗဟိုမှာပဲ ထားပါ
-                    y: rect.top + rect.height / 2, // မူလအတိုင်း အလယ်ဗဟိုမှာပဲ ထားပါ
-                    width: rect.width + 10, // ဘယ်/ညာ 5px စီ ပိုထွက်သွားမည်
-                    height: rect.height + 10, // အပေါ်/အောက် 5px စီ ပိုထွက်သွားမည်
-                    backgroundColor: "transparent",
-                    border: "1px solid white",
-                    borderRadius: "29px",
-                    duration: 0.3,
-                    ease: "power2.out",
-                  });
-                }
-              }}
-              onMouseLeave={(e) => {
-                activeCardRef.current = null;
-
-                const cursor = document.getElementById("cursor");
-                if (cursor) {
-                  // 💡 ဤနေရာတွင် cursor.classList.remove("locked"); ကို ချက်ချင်း မဖြုတ်တော့ပါ။
-
-                  gsap.to(cursor, {
-                    x: e.clientX, // Card အလယ်ကနေ Mouse ထွက်သွားတဲ့ နေရာဆီကို ချောချောမွေ့မွေ့ ပြန်ရွှေ့ပေးမည်
-                    y: e.clientY,
-                    width: 20,
-                    height: 20,
-                    backgroundColor: "transparent",
-                    border: "1px solid white",
-                    borderRadius: "100%",
-                    duration: 0.3,
-                    ease: "power2.out",
-                    onComplete: () => {
-                      // 💡 Animation ပြီးသွားမှသာ (ကတ်အရွယ်အစားမှ သေးသွားပြီးမှသာ) Mouse နောက်လိုက်ရန် locked ကို ဖြုတ်ပါမည်
-                      cursor.classList.remove("locked");
-                    },
-                  });
-                }
-              }}
               className={`group relative flex rounded-[1.5rem] overflow-hidden transition-all duration-300 border hover:shadow-xl ${
                 item.spanClasses
               } ${
