@@ -5,17 +5,24 @@ import { useGSAP } from "@gsap/react";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
+
+  // 💡 Mouse သုံးသော Device ဟုတ်မဟုတ် မှတ်သားရန် State
   const [hasMouse, setHasMouse] = useState(true);
 
   useEffect(() => {
+    // CSS Media Query အသုံးပြု၍ (pointer: fine) ဆိုလိုသည်မှာ Mouse ပါဝင်သော Device ကို စစ်ဆေးခြင်းဖြစ်သည်
     const checkPointer = () => {
       setHasMouse(window.matchMedia("(pointer: fine)").matches);
     };
+
+    // ပထမဆုံး Component တက်လာချိန်တွင် စစ်ဆေးပါမည်
     checkPointer();
   }, []);
 
   useGSAP(() => {
     const cursor = cursorRef.current;
+
+    // 💡 အကယ်၍ Mouse မရှိသော (ဖုန်း/Tablet) ဖြစ်ပါက GSAP Event များ လုံးဝ အလုပ်မလုပ်စေရန် ရပ်တန့်ထားပါမည်
     if (!cursor || !hasMouse) return;
 
     gsap.set(cursor, {
@@ -28,21 +35,22 @@ export default function CustomCursor() {
       height: "20px",
     });
 
+    const xTo = gsap.quickTo(cursor, "x", {
+      duration: 0.15,
+      ease: "power3.out",
+    });
+    const yTo = gsap.quickTo(cursor, "y", {
+      duration: 0.15,
+      ease: "power3.out",
+    });
+
     let isVisible = false;
 
     const handleMouseMove = (e: MouseEvent) => {
       if (cursor.classList.contains("locked")) return;
 
-      // 💡 ပြင်ဆင်ချက် - gsap.quickTo အစား gsap.to ကိုသုံးပါမည်။
-      // overwrite: "auto" ပါဝင်သောကြောင့် Services ထဲမှ Animation များနှင့် လုံးဝ ငြိမည်မဟုတ်ပါ။
-      gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.15,
-        ease: "power3.out",
-        overwrite: "auto",
-      });
-
+      xTo(e.clientX);
+      yTo(e.clientY);
       if (!isVisible) {
         gsap.to(cursor, { opacity: 1, scale: 1, duration: 0.3 });
         isVisible = true;
@@ -68,8 +76,9 @@ export default function CustomCursor() {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [hasMouse]);
+  }, [hasMouse]); // 💡 hasMouse State ကို Dependency အဖြစ် ထည့်ထားပါသည်
 
+  // 💡 အကယ်၍ ဖုန်း/Tablet ဖြစ်နေပါက HTML ထဲတွင် Cursor Element အား လုံးဝ(လုံးဝ) မထည့်သွင်းဘဲ null ပြန်ပေးပါမည်
   if (!hasMouse) return null;
 
   return (

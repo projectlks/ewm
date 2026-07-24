@@ -3,7 +3,8 @@ import {
   BuildingLibraryIcon,
   ShieldCheckIcon,
   SignalIcon,
-} from "@heroicons/react/24/outline";
+  ArrowLongRightIcon,
+} from "@heroicons/react/24/solid";
 
 interface ProjectTag {
   name: string;
@@ -34,7 +35,7 @@ const projectsData: ProjectItem[] = [
       { name: "Identity Management" },
     ],
     status: "Ongoing",
-    statusColor: "bg-blue-50 text-blue-700 border-blue-200",
+    statusColor: "text-blue-700 bg-blue-50 border-blue-200",
   },
   {
     id: "surveillance",
@@ -49,75 +50,114 @@ const projectsData: ProjectItem[] = [
       { name: "System Integration" },
     ],
     status: "Completed",
-    statusColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    statusColor: "text-emerald-700 bg-emerald-50 border-emerald-200",
   },
 ];
 
 export function ProjectReferencesSection(): React.JSX.Element {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    // 💡 နောက်ခံကို မျက်စိအေးစေမယ့် မီးခိုးဖျော့ (Very Light Gray/Slate) အရောင်ပြောင်းထားပါသည် bg-[#F8FAFC]
+    <section className="relative py-24 md:py-32 ">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-3">
-            Featured Projects
-          </h2>
-          <p className="text-sm md:text-base text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            Delivering high-impact, national-scale infrastructure and telecom
-            solutions for critical government sectors.
-          </p>
-        </div>
-
-        {/* 
-          Projects Grid: Desktop တွင် 2-cols (ပရောဂျက် ၂ ခုဖြစ်သောကြောင့် အချိုးကျပါသည်)
-        */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          {projectsData.map((project: ProjectItem) => (
-            <div
-              key={project.id}
-              className="group relative flex flex-col p-8 md:p-10 bg-white rounded-3xl border border-gray-100 shadow-sm  hover:border-blue-500/20 transition-all duration-300">
-              {/* Top Header: Icon & Status */}
-              <div className="flex justify-between items-start mb-8">
-                <div className="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center border border-gray-100 group-hover:bg-blue-50/50 group-hover:scale-110 transition-all duration-300">
-                  {project.icon}
-                </div>
-
-                {/* Status Badge */}
-                <span
-                  className={`px-3 py-1 text-xs font-semibold rounded-full border ${project.statusColor}`}>
-                  {project.status}
-                </span>
-              </div>
-
-              {/* Client / Ministry Info */}
-              <div className="flex items-center text-sm font-medium text-gray-500 mb-3">
-                <BuildingLibraryIcon className="w-4 h-4 mr-2 shrink-0" />
-                <span className="truncate">{project.client}</span>
-              </div>
-
-              {/* Project Title */}
-              <h3 className="text-xl font-bold text-gray-900 mb-4 tracking-tight leading-snug">
-                {project.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-sm text-gray-600 leading-relaxed mb-8 flex-1">
-                {project.description}
+        {/* Editorial Layout: Left Sticky Header, Right Scrolling Cards */}
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
+          {/* =======================
+              Left Column: Sticky Header
+              ======================= */}
+          <div className="lg:w-1/3 relative">
+            <div className="lg:sticky lg:top-32">
+              <span className="inline-flex items-center gap-2 text-blue-600 font-bold tracking-widest uppercase text-xs mb-6">
+                <span className="w-8 h-[2px] bg-blue-600"></span>
+                Our Masterpieces
+              </span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
+                Featured <br className="hidden lg:block" />
+                Projects.
+              </h2>
+              <p className="text-base text-gray-500 leading-relaxed max-w-sm mb-10">
+                Delivering high-impact, national-scale infrastructure and
+                telecom solutions for critical government sectors.
               </p>
 
-              {/* Tags / Technologies */}
-              <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-gray-100">
-                {project.tags.map((tag: ProjectTag, index: number) => (
-                  <span
-                    key={index}
-                    // အပြာနုရောင် နောက်ခံနှင့် အပြာရင့်ရောင်စာသား အသုံးပြုထားသည်
-                    className="px-3 py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 rounded-lg border border-blue-100 hover:bg-blue-100 transition-colors cursor-default">
-                    {tag.name}
-                  </span>
-                ))}
-              </div>
+              {/* Explore More Button (Optional) */}
+              {/* <div className="hidden lg:flex items-center gap-2 text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors cursor-pointer group">
+                View all case studies
+                <ArrowLongRightIcon className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
+              </div> */}
             </div>
-          ))}
+          </div>
+
+          {/* =======================
+              Right Column: Project Cards
+              ======================= */}
+          <div className="lg:w-2/3 flex flex-col gap-10">
+            {projectsData.map((project: ProjectItem) => (
+              <div
+                key={project.id}
+                className="group relative bg-white p-8 md:p-12 rounded-4xl border border-gray-200 shadow-sm  transition-all overflow-hidden">
+                {/* 💡 Watermark ကို သေချာလေး ပြန်ချိန်ပေးထားပါသည် */}
+                <div className="absolute -right-8 -bottom-8 md:-right-12 md:-bottom-12 z-0 pointer-events-none select-none transition-all duration-700 ">
+                  <BuildingLibraryIcon className="w-48 h-48 md:w-64 md:h-64 xl:w-100 xl:h-100 text-gray-50  transition-colors duration-700 stroke-1" />
+                </div>
+
+                {/* 💡 Hover လုပ်မှသာ ပေါ်လာမယ့် ခပ်ဖျော့ဖျော့ Gradient Glow Effect */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-linear-to-bl from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl pointer-events-none"></div>
+
+                <div className="relative z-10">
+                  {/* Icon & Status */}
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-6 mb-10">
+                    <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center border border-gray-100 group-hover:scale-110 group-hover:bg-blue-50/50 transition-all duration-500">
+                      {project.icon}
+                    </div>
+                    <span
+                      className={`px-4 py-1.5 text-xs font-bold rounded-full border tracking-wide uppercase ${project.statusColor}`}>
+                      {project.status}
+                    </span>
+                  </div>
+
+                  {/* Client Info */}
+                  <div className="flex items-center text-sm font-semibold text-gray-500 mb-4">
+                    <span>{project.client}</span>
+                  </div>
+
+                  {/* Project Title */}
+                  <h3 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-5 tracking-tight group-hover:text-blue-600 transition-colors duration-300">
+                    {project.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-base text-gray-600 leading-relaxed mb-10">
+                    {project.description}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 pt-8 border-t border-gray-100">
+                    {project.tags.map((tag: ProjectTag, index: number) => {
+                      // 💡 Tag များအတွက် အရောင်အစုံ ပါဝင်သော Array
+                      const tagColors: string[] = [
+                        "text-blue-600 bg-blue-50 border-blue-100 hover:bg-blue-600 hover:shadow-blue-600/20",
+                        "text-emerald-600 bg-emerald-50 border-emerald-100 hover:bg-emerald-600 hover:shadow-emerald-600/20",
+                        "text-purple-600 bg-purple-50 border-purple-100 hover:bg-purple-600 hover:shadow-purple-600/20",
+                        "text-amber-600 bg-amber-50 border-amber-100 hover:bg-amber-600 hover:shadow-amber-600/20",
+                        "text-rose-600 bg-rose-50 border-rose-100 hover:bg-rose-600 hover:shadow-rose-600/20",
+                      ];
+
+                      // 💡 အရောင်များကို အလှည့်ကျ ယူရန် (index % tagColors.length)
+                      const colorClass = tagColors[index % tagColors.length];
+
+                      return (
+                        <span
+                          key={index}
+                          className={`px-4 py-2 text-xs font-bold rounded-full border hover:text-white  transition-all duration-300 cursor-default ${colorClass}`}>
+                          {tag.name}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -43,12 +43,10 @@ const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl  z-50 transition-all duration-300 ${
-        scrolled
-          ? " py-3"
-          : "bg-transparent py-5"
+      className={`fixed top-0 left-1/2 -translate-x-1/2 w-full  z-50 transition-all duration-300 ${
+        scrolled ? "bg-white md:bg-white/95 backdrop-blur-xl" : "bg-white md:bg-transparent "
       }`}>
-      <div className=" px-4 sm:px-6 backdrop-blur-2xl lg:px-8">
+      <div className="max-w-7xl  mx-auto py-3  px-4 sm:px-6  lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo Section */}
           <Link href="/" className="shrink-0 flex items-center group">
@@ -58,7 +56,7 @@ const Navbar: React.FC = () => {
               width={200}
               height={40}
               priority
-              className="w-auto h-16 object-contain transition-transform duration-300 group-hover:scale-105"
+              className="w-auto h-10 md:h-16 object-contain "
             />
           </Link>
 
@@ -120,42 +118,54 @@ const Navbar: React.FC = () => {
       {/* Mobile Navigation (Framer Motion) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden overflow-hidden bg-white/95 backdrop-blur-xl border-b border-gray-200 absolute top-full left-0 w-full shadow-xl">
-            <div className="px-4 pt-4 pb-8 space-y-1">
-              {navItems.map((item: NavItem, index) => (
+          <>
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setIsMobileMenuOpen(false)} // 💡 နှိပ်လိုက်လျှင် ပိတ်သွားစေရန်
+              className="md:hidden absolute top-full left-0 w-full h-screen bg-black/60 z-40 backdrop-blur-sm cursor-pointer"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="md:hidden z-50 overflow-hidden bg-white backdrop-blur-xl border-b border-gray-200 absolute top-full left-0 w-full shadow-sm">
+              <div className="px-4 pt-4 pb-8 space-y-1">
+                {navItems.map((item: NavItem, index) => (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}>
+                    <Link
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block px-4 py-3.5 text-base font-semibold text-gray-800 hover:text-blue-600 hover:bg-blue-50/50 rounded-xl transition-colors duration-200">
+                      {item.name}
+                    </Link>
+                  </motion.div>
+                ))}
+
                 <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}>
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: navItems.length * 0.1 }}
+                  className="pt-6">
                   <Link
-                    href={item.href}
+                    href="#contact"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-4 py-3.5 text-base font-semibold text-gray-800 hover:text-blue-600 hover:bg-blue-50/50 rounded-xl transition-colors duration-200">
-                    {item.name}
+                    className="flex w-full justify-center px-6 py-3.5 bg-gray-900 text-white text-base font-bold rounded-2xl hover:bg-blue-600 transition-colors shadow-lg">
+                    Get in touch
                   </Link>
                 </motion.div>
-              ))}
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navItems.length * 0.1 }}
-                className="pt-6">
-                <Link
-                  href="#contact"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex w-full justify-center px-6 py-3.5 bg-gray-900 text-white text-base font-bold rounded-2xl hover:bg-blue-600 transition-colors shadow-lg">
-                  Get in touch
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

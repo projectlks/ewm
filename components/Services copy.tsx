@@ -64,16 +64,16 @@ const ServicesBento: React.FC = () => {
   const activeCardRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    // 💡 Ticker အစား Scroll Event ကိုသာ ပြန်သုံးပါမည်
     const handleScroll = () => {
       if (activeCardRef.current) {
         const cursor = document.getElementById("cursor");
+        // Locked ဖြစ်နေချိန် (Hover လုပ်ထားချိန်) တွင်သာ Scroll နောက်သို့ လိုက်စေမည်
         if (cursor && cursor.classList.contains("locked")) {
           const rect = activeCardRef.current.getBoundingClientRect();
           gsap.set(cursor, {
             x: rect.left + rect.width / 2,
             y: rect.top + rect.height / 2,
-            // 💡 Scroll ဆွဲချိန်တွင် Hover Animation အဟောင်းနှင့် လုနေခြင်းကို ဖျက်ရန်
-            overwrite: "auto", 
           });
         }
       }
@@ -123,65 +123,70 @@ const ServicesBento: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           variants={containerVariants}
+          onMouseEnter={(e) => {
+            const card = e.currentTarget as HTMLDivElement;
+            activeCardRef.current = card;
+
+            const cursor = document.getElementById("cursor");
+            if (cursor) {
+              cursor.classList.add("locked");
+              const rect = card.getBoundingClientRect();
+
+              // 💡 x နှင့် y ကို ဤနေရာသို့ ပြန်ထည့်လိုက်ခြင်းဖြင့် Smooth Animation ပြန်ရသွားပါမည်
+              gsap.to(cursor, {
+                x: rect.left + rect.width / 2, // မူလအတိုင်း အလယ်ဗဟိုမှာပဲ ထားပါ
+                y: rect.top + rect.height / 2, // မူလအတိုင်း အလယ်ဗဟိုမှာပဲ ထားပါ
+                width: rect.width + 20, // ဘယ်/ညာ 5px စီ ပိုထွက်သွားမည်
+                height: rect.height + 20, // အပေါ်/အောက် 5px စီ ပိုထွက်သွားမည်
+                backgroundColor: "transparent",
+                border: "1px solid gray",
+                borderRadius: "34px",
+                duration: 0.3,
+                ease: "power2.out",
+              });
+            }
+          }}
+          onMouseLeave={(e) => {
+            activeCardRef.current = null;
+
+            const cursor = document.getElementById("cursor");
+            if (cursor) {
+              // 💡 ဤနေရာတွင် cursor.classList.remove("locked"); ကို ချက်ချင်း မဖြုတ်တော့ပါ။
+
+              gsap.to(cursor, {
+                // x: e.clientX, // Card အလယ်ကနေ Mouse ထွက်သွားတဲ့ နေရာဆီကို ချောချောမွေ့မွေ့ ပြန်ရွှေ့ပေးမည်
+                // y: e.clientY,
+                // width: 20,
+                // height: 20,
+                // backgroundColor: "transparent",
+                // border: "1px solid white",
+                // borderRadius: "100%",
+                // duration: 0.3,
+                // ease: "power2.out",
+
+                x: e.clientX,
+                y: e.clientY,
+                xPercent: -50,
+                yPercent: -50,
+                width: 20,
+                height: 20,
+                backgroundColor: "transparent",
+                border: "1px solid white",
+                borderRadius: "100%",
+                duration: 0.3,
+                ease: "power2.out",
+                onComplete: () => {
+                  // 💡 Animation ပြီးသွားမှသာ (ကတ်အရွယ်အစားမှ သေးသွားပြီးမှသာ) Mouse နောက်လိုက်ရန် locked ကို ဖြုတ်ပါမည်
+                  cursor.classList.remove("locked");
+                },
+              });
+            }
+          }}
           className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           {bentoData.map((item: BentoItem) => (
             <motion.div
               key={item.id}
               variants={itemVariants}
-              onMouseEnter={(e) => {
-                const card = e.currentTarget as HTMLDivElement;
-                activeCardRef.current = card;
-
-                const cursor = document.getElementById("cursor");
-                if (cursor) {
-                  cursor.classList.add("locked");
-                  const rect = card.getBoundingClientRect();
-
-                  gsap.to(cursor, {
-                    x: rect.left + rect.width / 2,
-                    y: rect.top + rect.height / 2,
-                    xPercent: -50,
-                    yPercent: -50,
-                    width: rect.width + 20,
-                    height: rect.height + 20,
-                    backgroundColor: "transparent",
-                    border: "1px solid gray",
-                    borderRadius: "34px",
-                    duration: 0.3,
-                    ease: "power2.out",
-                    overwrite: "auto",
-                  });
-                }
-              }}
-              onMouseLeave={(e) => {
-                activeCardRef.current = null;
-
-                const cursor = document.getElementById("cursor");
-                if (cursor) {
-                  // 💡 locked ကို ချက်ချင်း ဖြုတ်ပါမည်
-                  cursor.classList.remove("locked");
-
-                  // 💡 x, y နေရာချထားမှုကို Cursor.tsx က တာဝန်ယူသွားမည်ဖြစ်၍ ပုံစံကိုသာ အဝိုင်းလေး ပြန်ဖြစ်အောင် ချုံ့ပေးပါမည်
-                  gsap.to(cursor, {
-                    width: 20,
-                    height: 20,
-                    backgroundColor: "transparent",
-                    border: "1px solid white",
-                    borderRadius: "100%",
-                    duration: 0.3,
-                    ease: "power2.out",
-                    overwrite: "auto",
-                  });
-
-                  // 💡 Cursor.tsx ရှိ Animation အား ချက်ချင်း အလုပ်ပြန်လုပ်စေရန် MouseEvent အတုကို Trigger လုပ်ပါမည်[cite: 6]
-                  window.dispatchEvent(
-                    new MouseEvent("mousemove", {
-                      clientX: e.clientX,
-                      clientY: e.clientY,
-                    }),
-                  );
-                }
-              }}
               className={`group relative flex rounded-[1.5rem] overflow-hidden transition-all duration-300 border hover:shadow-xl ${
                 item.spanClasses
               } ${
@@ -189,7 +194,6 @@ const ServicesBento: React.FC = () => {
                   ? "bg-[#0B1121] border-gray-800 text-white shadow-lg shadow-blue-900/10"
                   : "bg-white border-gray-200 text-gray-900 shadow-md shadow-gray-200/50"
               }`}>
-              {/* Card Contents (No changes here) */}
               {item.spanClasses === "lg:col-span-2" ? (
                 <div className="flex flex-col md:flex-row w-full p-6 sm:p-8 gap-6 md:items-center pointer-events-none">
                   <div className="flex-1 flex flex-col justify-center z-10">

@@ -94,9 +94,12 @@ export default function RootLayout({
         <Cursor />
 
         <Analytics />
-        <SplashScreen />
+        {/* <SplashScreen /> */}
         <Navbar />
-        <main className="container mx-auto">{children}</main>
+        <main className="container mx-auto  scroll-smooth  ">
+          {/* border-x border-gray-200 border-dashed px-5  */}
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
