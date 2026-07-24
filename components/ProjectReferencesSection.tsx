@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import {
   BuildingLibraryIcon,
@@ -5,6 +6,7 @@ import {
   SignalIcon,
   ArrowLongRightIcon,
 } from "@heroicons/react/24/solid";
+import { useCursorHover } from "@/hook/useCursorHover";
 
 interface ProjectTag {
   name: string;
@@ -55,6 +57,7 @@ const projectsData: ProjectItem[] = [
 ];
 
 export function ProjectReferencesSection(): React.JSX.Element {
+  const { handleMouseEnter, handleMouseLeave } = useCursorHover();
   return (
     // 💡 နောက်ခံကို မျက်စိအေးစေမယ့် မီးခိုးဖျော့ (Very Light Gray/Slate) အရောင်ပြောင်းထားပါသည် bg-[#F8FAFC]
     <section className="relative py-24 md:py-32 ">
@@ -93,8 +96,10 @@ export function ProjectReferencesSection(): React.JSX.Element {
           <div className="lg:w-2/3 flex flex-col gap-10">
             {projectsData.map((project: ProjectItem) => (
               <div
+                onMouseEnter={(e) => handleMouseEnter(e)}
+                onMouseLeave={handleMouseLeave}
                 key={project.id}
-                className="group relative bg-white p-8 md:p-12 rounded-4xl border border-gray-200 shadow-sm  transition-all overflow-hidden">
+                className="group relative bg-white p-8 md:p-12 rounded-3xl border border-gray-200 shadow-sm  transition-all overflow-hidden">
                 {/* 💡 Watermark ကို သေချာလေး ပြန်ချိန်ပေးထားပါသည် */}
                 <div className="absolute -right-8 -bottom-8 md:-right-12 md:-bottom-12 z-0 pointer-events-none select-none transition-all duration-700 ">
                   <BuildingLibraryIcon className="w-48 h-48 md:w-64 md:h-64 xl:w-100 xl:h-100 text-gray-50  transition-colors duration-700 stroke-1" />

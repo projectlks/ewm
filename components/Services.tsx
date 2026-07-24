@@ -9,6 +9,7 @@ import {
   CpuChipIcon,
 } from "@heroicons/react/24/outline";
 import gsap from "gsap";
+import { useCursorHover } from "@/hook/useCursorHover";
 
 interface BentoItem {
   id: string;
@@ -61,27 +62,7 @@ const bentoData: BentoItem[] = [
 ];
 
 const ServicesBento: React.FC = () => {
-  const activeCardRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (activeCardRef.current) {
-        const cursor = document.getElementById("cursor");
-        if (cursor && cursor.classList.contains("locked")) {
-          const rect = activeCardRef.current.getBoundingClientRect();
-          gsap.set(cursor, {
-            x: rect.left + rect.width / 2,
-            y: rect.top + rect.height / 2,
-            // 💡 Scroll ဆွဲချိန်တွင် Hover Animation အဟောင်းနှင့် လုနေခြင်းကို ဖျက်ရန်
-            overwrite: "auto", 
-          });
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const { handleMouseEnter, handleMouseLeave } = useCursorHover();
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -128,60 +109,62 @@ const ServicesBento: React.FC = () => {
             <motion.div
               key={item.id}
               variants={itemVariants}
-              onMouseEnter={(e) => {
-                const card = e.currentTarget as HTMLDivElement;
-                activeCardRef.current = card;
+              // onMouseEnter={(e) => {
+              //   const card = e.currentTarget as HTMLDivElement;
+              //   activeCardRef.current = card;
 
-                const cursor = document.getElementById("cursor");
-                if (cursor) {
-                  cursor.classList.add("locked");
-                  const rect = card.getBoundingClientRect();
+              //   const cursor = document.getElementById("cursor");
+              //   if (cursor) {
+              //     cursor.classList.add("locked");
+              //     const rect = card.getBoundingClientRect();
 
-                  gsap.to(cursor, {
-                    x: rect.left + rect.width / 2,
-                    y: rect.top + rect.height / 2,
-                    xPercent: -50,
-                    yPercent: -50,
-                    width: rect.width + 20,
-                    height: rect.height + 20,
-                    backgroundColor: "transparent",
-                    border: "1px solid gray",
-                    borderRadius: "34px",
-                    duration: 0.3,
-                    ease: "power2.out",
-                    overwrite: "auto",
-                  });
-                }
-              }}
-              onMouseLeave={(e) => {
-                activeCardRef.current = null;
+              //     gsap.to(cursor, {
+              //       x: rect.left + rect.width / 2,
+              //       y: rect.top + rect.height / 2,
+              //       xPercent: -50,
+              //       yPercent: -50,
+              //       width: rect.width + 20,
+              //       height: rect.height + 20,
+              //       backgroundColor: "transparent",
+              //       border: "1px solid gray",
+              //       borderRadius: "34px",
+              //       duration: 0.3,
+              //       ease: "power2.out",
+              //       overwrite: "auto",
+              //     });
+              //   }
+              // }}
+              // onMouseLeave={(e) => {
+              //   activeCardRef.current = null;
 
-                const cursor = document.getElementById("cursor");
-                if (cursor) {
-                  // 💡 locked ကို ချက်ချင်း ဖြုတ်ပါမည်
-                  cursor.classList.remove("locked");
+              //   const cursor = document.getElementById("cursor");
+              //   if (cursor) {
+              //     // 💡 locked ကို ချက်ချင်း ဖြုတ်ပါမည်
+              //     cursor.classList.remove("locked");
 
-                  // 💡 x, y နေရာချထားမှုကို Cursor.tsx က တာဝန်ယူသွားမည်ဖြစ်၍ ပုံစံကိုသာ အဝိုင်းလေး ပြန်ဖြစ်အောင် ချုံ့ပေးပါမည်
-                  gsap.to(cursor, {
-                    width: 20,
-                    height: 20,
-                    backgroundColor: "transparent",
-                    border: "1px solid white",
-                    borderRadius: "100%",
-                    duration: 0.3,
-                    ease: "power2.out",
-                    overwrite: "auto",
-                  });
+              //     // 💡 x, y နေရာချထားမှုကို Cursor.tsx က တာဝန်ယူသွားမည်ဖြစ်၍ ပုံစံကိုသာ အဝိုင်းလေး ပြန်ဖြစ်အောင် ချုံ့ပေးပါမည်
+              //     gsap.to(cursor, {
+              //       width: 20,
+              //       height: 20,
+              //       backgroundColor: "transparent",
+              //       border: "1px solid white",
+              //       borderRadius: "100%",
+              //       duration: 0.3,
+              //       ease: "power2.out",
+              //       overwrite: "auto",
+              //     });
 
-                  // 💡 Cursor.tsx ရှိ Animation အား ချက်ချင်း အလုပ်ပြန်လုပ်စေရန် MouseEvent အတုကို Trigger လုပ်ပါမည်[cite: 6]
-                  window.dispatchEvent(
-                    new MouseEvent("mousemove", {
-                      clientX: e.clientX,
-                      clientY: e.clientY,
-                    }),
-                  );
-                }
-              }}
+              //     // 💡 Cursor.tsx ရှိ Animation အား ချက်ချင်း အလုပ်ပြန်လုပ်စေရန် MouseEvent အတုကို Trigger လုပ်ပါမည်[cite: 6]
+              //     window.dispatchEvent(
+              //       new MouseEvent("mousemove", {
+              //         clientX: e.clientX,
+              //         clientY: e.clientY,
+              //       }),
+              //     );
+              //   }
+              // }}
+              onMouseEnter={(e) => handleMouseEnter(e)}
+              onMouseLeave={handleMouseLeave}
               className={`group relative flex rounded-[1.5rem] overflow-hidden transition-all duration-300 border hover:shadow-xl ${
                 item.spanClasses
               } ${

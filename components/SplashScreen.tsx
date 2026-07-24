@@ -102,7 +102,7 @@ export function SplashScreen(): React.JSX.Element | null {
   return (
     <div
       id="splash-wrapper"
-      className="fixed inset-0 z-[9999] pointer-events-none">
+      className="fixed inset-0 z-20000 pointer-events-none">
       {/* Background Fade Out Effect[cite: 15] */}
       <div
         className={`absolute inset-0 bg-white pointer-events-auto transition-opacity duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -154,7 +154,7 @@ export function SplashScreen(): React.JSX.Element | null {
 
         body.splash-active {
           overflow: hidden !important;
-          background-color: #f3f4f6 !important; /*[cite: 15] */
+          // background-color: #f3f4f6 !important; /*[cite: 15] */
         }
 
         body.app-revealing > *:not(#splash-wrapper) {

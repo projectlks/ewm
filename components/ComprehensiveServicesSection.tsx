@@ -1,5 +1,8 @@
+
+"use client"
 import React from "react";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { useCursorHover } from "@/hook/useCursorHover";
 
 interface ServiceItem {
   name: string;
@@ -65,6 +68,7 @@ const servicesData: ServiceCategory[] = [
 ];
 
 export function ComprehensiveServicesSection(): React.JSX.Element {
+  const { handleMouseEnter, handleMouseLeave } = useCursorHover();
   return (
     <section className="py-16 md:py-24 ">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -85,8 +89,10 @@ export function ComprehensiveServicesSection(): React.JSX.Element {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {servicesData.map((service: ServiceCategory) => (
             <div
+              onMouseEnter={(e) => handleMouseEnter(e)}
+              onMouseLeave={handleMouseLeave}
               key={service.id}
-              className="group relative overflow-hidden bg-white p-8 md:p-10 rounded-2xl border border-gray-100  transition-all duration-300 flex flex-col">
+              className="group relative overflow-hidden bg-white p-8 md:p-10 rounded-3xl border border-gray-100  transition-all duration-300 flex flex-col">
               {/* ================= BACKGROUND WATERMARK NUMBER ================= */}
               <div className="absolute -right-4 -bottom-6 text-[120px] md:text-[160px] font-black text-gray-50 group-hover:text-blue-50/60 group-hover:-translate-y-4 transition-all duration-500 pointer-events-none select-none z-0 leading-none">
                 {service.number}
@@ -95,12 +101,6 @@ export function ComprehensiveServicesSection(): React.JSX.Element {
               {/* ================= FOREGROUND CONTENT ================= */}
               <div className="relative z-10 flex flex-col h-full">
                 {/* Title */}
-
-                {/* <h3 className="text-xl font-bold text-gray-900  mb-4 tracking-tight flex items-center">
-                  ခေါင်းစဉ်ရှေ့တွင် အပြာရောင်မျဉ်းတိုလေး ထည့်သွင်းထားပါသည်
-                  <span className="w-8 h-1 bg-blue-600 rounded-full mr-4 transition-all duration-300 group-hover:w-12"></span>
-                  {service.title}
-                </h3> */}
 
                 <h3 className="text-xl font-bold text-gray-900 mb-4 tracking-tight flex items-center">
                   {/* မျဉ်းပြာလေး ပိန်ုံမသွားစေရန် shrink-0 ထည့်ထားပါသည် */}
