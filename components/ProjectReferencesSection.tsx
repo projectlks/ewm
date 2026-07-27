@@ -4,7 +4,7 @@ import {
   BuildingLibraryIcon,
   ShieldCheckIcon,
   SignalIcon,
-  ArrowLongRightIcon,
+  
 } from "@heroicons/react/24/solid";
 import { useCursorHover } from "@/hook/useCursorHover";
 
@@ -60,7 +60,7 @@ export function ProjectReferencesSection(): React.JSX.Element {
   const { handleMouseEnter, handleMouseLeave } = useCursorHover();
   return (
     // 💡 နောက်ခံကို မျက်စိအေးစေမယ့် မီးခိုးဖျော့ (Very Light Gray/Slate) အရောင်ပြောင်းထားပါသည် bg-[#F8FAFC]
-    <section className="relative py-24 md:py-32 ">
+    <section className="relative py-24 md:py-32 " id="projects">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Editorial Layout: Left Sticky Header, Right Scrolling Cards */}
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">

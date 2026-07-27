@@ -16,7 +16,7 @@ const coreValuesData: CoreValue[] = [
     description:
       "We prioritize our clients' needs, ensuring satisfaction, trust, and long-term success through dedicated support.",
     imageUrl:
-      "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800", // Customer Support / Friendly interaction
   },
   {
     id: "innovation",
@@ -24,7 +24,7 @@ const coreValuesData: CoreValue[] = [
     description:
       "Embracing cutting-edge technology and forward-thinking strategies to deliver modern, efficient solutions.",
     imageUrl:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800", // Modern Tech / Innovation Team
   },
   {
     id: "integrity-quality",
@@ -32,7 +32,7 @@ const coreValuesData: CoreValue[] = [
     description:
       "Upholding the highest ethical standards while delivering premium, reliable, and standardized results.",
     imageUrl:
-      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800",
+      "/3.jpg", // Professional Handshake / Trust
   },
   {
     id: "sustainability",
@@ -40,7 +40,7 @@ const coreValuesData: CoreValue[] = [
     description:
       "Committed to environmentally friendly practices, renewable energy, and the long-term viability of our projects.",
     imageUrl:
-      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&q=80&w=800", // Wind Turbines / Renewable Energy
   },
   {
     id: "interoperability",
@@ -48,7 +48,7 @@ const coreValuesData: CoreValue[] = [
     description:
       "Designing systems and infrastructure that seamlessly integrate, communicate, and work together flawlessly.",
     imageUrl:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800", // Global Network Connections
   },
 ];
 

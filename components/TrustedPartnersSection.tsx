@@ -17,17 +17,28 @@ const strategicPartners: Partner[] = [
   { name: "Oracle", logoUrl: "/logos/oracle.svg" },
   { name: "SolarWinds", logoUrl: "/logos/solarwinds.svg" },
   { name: "GSMA", logoUrl: "/logos/gsma.svg" },
-  // { },
   { name: "VMware", logoUrl: "/logos/vmware.svg" },
-  // {  },
+  { name: "ZTE", logoUrl: "/logos/zte.svg" },
+  { name: "Sangfor", logoUrl: "/logos/sangfor.png" },
+  { name: "EastWindRU", logoUrl: "/logos/ewru.svg" },
+  { name: "CAIH", logoUrl: "/logos/CAIH-side.png" },
+  { name: "WhaleColud", logoUrl: "/logos/whale-cloud.png" },
 ];
 
 // ၂။ Trusted By / Customers Data (၆ ခု)
 const trustedCustomers: Partner[] = [
-  { name: "Ministry of Finance and Revenue", logoUrl: "/logos/mpt.webp" },
+  { name: "Ministry of Home Affairs", logoUrl: "/logos/MOHA.png" },
   {
-    name: "Ministry of Digital Development and Communication",
-    logoUrl: "/logos/mpt.webp",
+    name: "Post and Telecommunications Department",
+    logoUrl: "/logos/PTD.png",
+  },
+  {
+    name: "Internal Revenue Department",
+    logoUrl: "/logos/ird.png",
+  },
+  {
+    name: "Ministry of Finance and Revenue",
+    logoUrl: "/logos/MFR.png",
   },
   { name: "MPT", logoUrl: "/logos/mpt.webp" },
   { name: "ATOM", logoUrl: "/logos/atom.png" },
@@ -92,23 +103,29 @@ export function TrustedPartnersSection(): React.JSX.Element {
             Trusted By
           </h2>
 
-          <div className="grid grid-cols-2 sm:max-w-3/5 mx-auto md:grid-cols-3">
+          <div className="grid grid-cols-2  mx-auto md:grid-cols-3 lg:grid-cols-4">
             {trustedCustomers.map((partner: Partner) => (
               <div
                 key={partner.name}
                 className={`
                   relative flex items-center group justify-center h-24 md:h-32 px-4 md:px-6
                   
+                  /* Vertical Borders (ညာဘက် မျဉ်းများ) */
                   after:absolute after:right-0 after:w-px after:bg-gray-300/80
                   after:top-4 after:bottom-4 md:after:top-6 md:after:bottom-6 
-                  max-md:even:after:hidden md:nth-[3n]:after:hidden last:after:hidden
+                  max-md:even:after:hidden 
+                  md:max-lg:nth-[3n]:after:hidden 
+                  lg:nth-[4n]:after:hidden 
+                  last:after:hidden
                   
+                  /* Horizontal Borders (အောက်ခြေ မျဉ်းများ) */
                   before:absolute before:bottom-0 before:h-px before:bg-gray-300/80
                   before:left-4 before:right-4 md:before:left-6 md:before:right-6
-                  max-md:nth-last-[-n+2]:before:hidden md:nth-last-[-n+3]:before:hidden
+                  max-md:nth-last-[-n+2]:before:hidden 
+                  md:max-lg:nth-last-[-n+3]:before:hidden 
+                  lg:nth-last-[-n+4]:before:hidden
                 `}>
-                {/* opacity-70 hover:opacity-100 duration-300  */}
-                <div className="relative w-full max-w-[120px] md:max-w-[160px] h-10 md:h-14 flex items-center justify-center text-gray-900 transition-all  grayscale group-hover:grayscale-0">
+                <div className="relative w-full max-w-[120px] md:max-w-[160px] h-10 md:h-14 flex items-center justify-center text-gray-900 transition-all grayscale group-hover:grayscale-0">
                   {typeof partner.logoUrl === "string" ? (
                     <Image
                       src={partner.logoUrl}

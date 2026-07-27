@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center">
             <Link
               href="#contact"
-              className="px-6 py-2.5 bg-gray-900 text-white text-sm font-semibold rounded-full hover:bg-blue-600 transition-colors duration-300 shadow-lg shadow-gray-900/20">
+              className="px-6 py-2.5 bg-gray-900 text-white text-sm font-semibold rounded-full hover:bg-blue-600 transition-colors duration-300">
               Get in touch
             </Link>
           </div>
