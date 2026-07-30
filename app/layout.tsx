@@ -1,56 +1,3 @@
-// import type { Metadata } from "next";
-// import { Plus_Jakarta_Sans, Inter } from "next/font/google";
-// import { Analytics } from "@vercel/analytics/next";
-
-// import "./globals.css";
-// import Navbar from "@/components/Navbar";
-// import { SplashScreen } from "@/components/SplashScreen";
-// import { Footer } from "@/components/Footer";
-
-// // Heading များအတွက် Plus Jakarta Sans (Variable font)
-// const plusJakarta = Plus_Jakarta_Sans({
-//   subsets: ["latin"],
-//   variable: "--font-plus-jakarta", // Tailwind တွင် သုံးနိုင်ရန် Variable ကြေညာခြင်း
-//   display: "swap",
-// });
-
-// // Body စာသားများအတွက် Inter (Variable font)
-// const inter = Inter({
-//   subsets: ["latin"],
-//   variable: "--font-inter", // Tailwind တွင် သုံးနိုင်ရန် Variable ကြေညာခြင်း
-//   display: "swap",
-// });
-
-// export const metadata: Metadata = {
-//   title: "East Wind Myanmar",
-//   description: "Empowering Myanmar's Digital Future",
-// };
-
-// export default function RootLayout({
-//   children,
-// }: Readonly<{
-//   children: React.ReactNode;
-// }>) {
-//   return (
-//     // ဤနေရာတွင် Font Variable (၂) မျိုးလုံးကို html tag ၌ ထည့်သွင်းထားပါသည်
-//     <html lang="en" className={`${plusJakarta.variable} ${inter.variable}`}>
-//       <body
-//         // font-sans က Default အနေဖြင့် Inter ကို ယူသွားမည်ဖြစ်ပါသည်
-//         className="font-sans antialiased text-gray-900 bg-white"
-//         suppressHydrationWarning>
-//         <div
-//           id="cursor"
-//           className="w-2 h-2 rounded-full bg-gray-950 fixed top-0 left-0 pointer-events-none z-50 opacity-100"></div>
-//         <Analytics />
-//         <SplashScreen />
-//         <Navbar />
-//         <main className="container mx-auto">{children}</main>
-//         <Footer />
-//       </body>
-//     </html>
-//   );
-// }
-
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
@@ -60,8 +7,6 @@ import Navbar from "@/components/Navbar";
 import { SplashScreen } from "@/components/SplashScreen";
 import { Footer } from "@/components/Footer";
 import Cursor from "@/components/Cursor";
-// import { Cursor } from "@/components/Cursor";
-// import Cursor from "@/components/Cursor";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -75,9 +20,42 @@ const inter = Inter({
   display: "swap",
 });
 
+// 💡 SEO နှင့် Social Media Share များအတွက် လိုက်ဖက်သော Metadata များ ထည့်သွင်းထားပါသည်
 export const metadata: Metadata = {
-  title: "East Wind Myanmar",
-  description: "Empowering Myanmar's Digital Future",
+  title: "East Wind Myanmar | Digital Infrastructure & IT Solutions",
+  description:
+    "Empowering Myanmar's Digital Future. We provide foundational technology solutions, seamless telecom implementation, and highly interoperable systems tailored for your needs.",
+  keywords: [
+    "East Wind Myanmar",
+    "IT Solutions Myanmar",
+    "Telecom Setup Myanmar",
+    "E-Government Solutions",
+    "Data Centers",
+    "Digital Infrastructure",
+    "Network Infrastructure",
+  ],
+  authors: [{ name: "East Wind Myanmar" }],
+  icons: {
+    // 💡 Favicon ကို logo.png အဖြစ် ပြောင်းလဲသတ်မှတ်ထားပါသည်
+    icon: "/logo.png",
+    apple: "/logo.png", // Apple devices များအတွက်
+  },
+  openGraph: {
+    title: "East Wind Myanmar | Digital Infrastructure & IT Solutions",
+    description:
+      "Empowering Myanmar's Digital Future through robust IT infrastructure, telecom solutions, and E-Government systems.",
+    siteName: "East Wind Myanmar",
+    images: [
+      {
+        url: "/logo.png",
+        width: 800,
+        height: 600,
+        alt: "East Wind Myanmar Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -90,16 +68,12 @@ export default function RootLayout({
       <body
         className="font-sans antialiased text-gray-900 bg-white"
         suppressHydrationWarning>
-        {/* သီးသန့် ခွဲထုတ်ထားသော GSAP Cursor ကို ဤနေရာတွင် ထည့်ပါ */}
         <Cursor />
 
         <Analytics />
         <SplashScreen />
         <Navbar />
-        <main className="container mx-auto  scroll-smooth  ">
-          {/* border-x border-gray-200 border-dashed px-5  */}
-          {children}
-        </main>
+        <main className="container mx-auto scroll-smooth">{children}</main>
         <Footer />
       </body>
     </html>

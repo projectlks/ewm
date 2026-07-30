@@ -149,7 +149,7 @@ export function Footer(): React.JSX.Element {
 
       {/* Bottom Section */}
       <div className="w-full border-t border-white/10 bg-[#0B1121] pt-6 pb-8 relative z-20">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-4 font-sans">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-center gap-4 font-sans">
           <div className="flex items-center gap-4">
             <div className="w-8 h-8 rounded-full bg-black border border-gray-700 flex items-center justify-center text-white font-bold text-xs shrink-0">
               E
@@ -160,18 +160,7 @@ export function Footer(): React.JSX.Element {
             </p>
           </div>
 
-          <div className="flex space-x-6">
-            <a
-              href="#"
-              className="text-gray-500 hover:text-white transition-colors text-xs md:text-sm">
-              LinkedIn
-            </a>
-            <a
-              href="#"
-              className="text-gray-500 hover:text-white transition-colors text-xs md:text-sm">
-              Facebook
-            </a>
-          </div>
+    
         </div>
       </div>
     </footer>

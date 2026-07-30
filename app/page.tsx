@@ -7,6 +7,7 @@ import { CoreValuesSection } from '@/components/CoreValuesSection';
 import HeroSection from '@/components/HeroSection'
 import { ProjectReferencesSection } from '@/components/ProjectReferencesSection';
 import ServicesSection from '@/components/Services'
+import TeamSection from '@/components/TeamSection';
 import { TrustedPartnersSection } from '@/components/TrustedPartnersSection';
 
 const page = () => {
@@ -14,16 +15,17 @@ const page = () => {
   return (
     <>
       {/* <Home /> */}
-      
+
       <HeroSection />
       <AboutSection />
       <ServicesSection />
+      <TeamSection />
       <TrustedPartnersSection />
       <BusinessLineUpSection />
       <ComprehensiveServicesSection />
       <ProjectReferencesSection />
       <CoreValuesSection />
-      <ContactSection/>
+      <ContactSection />
     </>
   );
 }

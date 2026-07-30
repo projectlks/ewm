@@ -49,7 +49,7 @@ const trustedCustomers: Partner[] = [
 export function TrustedPartnersSection(): React.JSX.Element {
   return (
     <section className="py-16 md:py-24 ">
-      <div className=" mx-auto px-4 md:px-6">
+      <div className=" mx-auto px-4 md:px-0">
         {/* ======================= STRATEGIC PARTNERS SECTION ======================= */}
         <div className="mb-40">
           <h2 className="text-center text-xl md:text-2xl font-bold mb-10 text-gray-900 tracking-tight">

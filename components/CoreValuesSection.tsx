@@ -52,6 +52,41 @@ const coreValuesData: CoreValue[] = [
   },
 ];
 
+// const coreValuesData: CoreValue[] = [
+//   {
+//     id: "ethics-legality",
+//     title: "Ethics and Legality",
+//     description:
+//       "Ethics and legality are our foundations, the starting and ending point of a long-term project featuring a strong commitment to improvement, transparency, sustainability, and personal development.",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=800",
+//   },
+//   {
+//     id: "excellence",
+//     title: "Excellence",
+//     description:
+//       "We want to delight our customers by creating extremely innovative, complete, and easy-to-use products, working quickly and efficiently to achieve the goals and objectives.",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+//   },
+//   {
+//     id: "digital-transformation",
+//     title: "Simplification & Digital Transformation",
+//     description:
+//       "We guide our Customers in building a more agile business, automating manual processes, and providing tools to measure results in process efficiency and resources optimization.",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
+//   },
+//   {
+//     id: "professionalism",
+//     title: "Individuality & Professionalism",
+//     description:
+//       "Intelligence, enthusiasm, and creativity are the key values of East Wind Myanmar's professionalism, aimed at continuous improvement to achieve ambitious goals.",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800",
+//   },
+// ];
+
 export function CoreValuesSection(): React.JSX.Element {
   // ပထမဆုံး အကွက်ကို Default အနေဖြင့် ကျယ်နေစေရန် သတ်မှတ်ထားပါသည်
   const [activeId, setActiveId] = useState<string>("customer-focus");

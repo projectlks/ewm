@@ -180,18 +180,18 @@ const HeroSection: React.FC = () => {
             variants={slideUpVariants}
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-30 w-full sm:w-auto px-4 sm:px-0">
             <Link
-              href="/solutions"
+              href="#"
               className="group relative inline-flex items-center justify-center w-full sm:w-auto px-5 py-3 sm:px-6 sm:py-3 bg-gray-900 text-white font-bold rounded-full overflow-hidden transition-transform  active:scale-95 ">
               <span className="relative z-10 flex items-center gap-2 text-sm">
                 Explore Solutions
                 <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
-            <Link
+            {/* <Link
               href="/projects/ceir"
               className="inline-flex items-center justify-center w-full sm:w-auto px-5 py-3 sm:px-6 sm:py-3 rounded-full border border-gray-200 text-gray-700 font-medium hover:bg-white transition-colors backdrop-blur-sm bg-white/50 shadow-sm text-sm">
               View CEIR Project
-            </Link>
+            </Link> */}
           </motion.div>
         </motion.div>
 
