@@ -73,7 +73,7 @@ export default function RootLayout({
         <Analytics />
         <SplashScreen />
         <Navbar />
-        <main className="containe r mx-auto scroll-smooth">{children}</main>
+        <main className="container mx-auto scroll-smooth">{children}</main>
         <Footer />
       </body>
     </html>
