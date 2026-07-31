@@ -1,170 +1,247 @@
-"use client"
+"use client";
+
 import React from "react";
-import {
-  BuildingLibraryIcon,
-  ShieldCheckIcon,
-  SignalIcon,
-  
-} from "@heroicons/react/24/solid";
-import { useCursorHover } from "@/hook/useCursorHover";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
-interface ProjectTag {
-  name: string;
-}
-
-interface ProjectItem {
-  id: string;
+// 💡 any Error မတက်စေရန် ProjectData Type ကို အတိအကျ ကြေညာထားပါသည်
+// 💡 image?: string ကို ထပ်တိုးထားပါသည်
+type ProjectData = {
   title: string;
+  year: string;
   client: string;
-  description: string;
-  icon: React.ReactNode;
-  tags: ProjectTag[];
-  status: string;
-  statusColor: string;
-}
+  desc: string;
+  image?: string;
+};
 
-const projectsData: ProjectItem[] = [
-  {
-    id: "ceir",
-    title: "Central Equipment Identity Register (CEIR)",
-    client: "Ministry of Digital Development and Communication",
-    description:
-      "Implementation of a nationwide system to manage and track mobile device identities, effectively preventing the use of counterfeit and stolen devices across the telecom network.",
-    icon: <SignalIcon className="w-7 h-7 text-blue-600" />,
-    tags: [
-      { name: "Telecom" },
-      { name: "Government" },
-      { name: "Identity Management" },
-    ],
-    status: "Ongoing",
-    statusColor: "text-blue-700 bg-blue-50 border-blue-200",
+const projects: Record<string, ProjectData> = {
+  small1: {
+    title: "CEIR Project",
+    year: "2024",
+    client: "MoPF / MOTC",
+    desc: "Central Equipment Identity Register.",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
   },
-  {
-    id: "surveillance",
-    title: "Integrated Surveillance System",
-    client: "Ministry of Finance and Revenue",
-    description:
-      "Deployment of an advanced, integrated surveillance and IT monitoring infrastructure to ensure security, regulatory compliance, and seamless data management.",
-    icon: <ShieldCheckIcon className="w-7 h-7 text-emerald-600" />,
-    tags: [
-      { name: "Security" },
-      { name: "IT Infrastructure" },
-      { name: "System Integration" },
-    ],
-    status: "Completed",
-    statusColor: "text-emerald-700 bg-emerald-50 border-emerald-200",
+  small2: {
+    title: "EIR Project",
+    year: "2024",
+    client: "MPT, U9, ATOM",
+    desc: "National Equipment Identity Register for mobile operators.",
+    // Telecom / Network နှင့်သက်ဆိုင်သောပုံ
+    image:
+      "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=800",
   },
-];
+  small3: {
+    title: "Surveillance System",
+    year: "2025",
+    client: "PTD",
+    desc: "Advanced CCTV systems & control frameworks.",
+    // CCTV / Surveillance နှင့်သက်ဆိုင်သောပုံ
+    image:
+      "https://images.unsplash.com/photo-1549109926-58f039549485?auto=format&fit=crop&q=80&w=800",
+  },
+  small4: {
+    title: "24/7 Tech Support",
+    year: "2025",
+    client: "IRD",
+    desc: "24/7 Technical Support Center Solution.",
+    // Tech Support / Helpdesk နှင့်သက်ဆိုင်သောပုံ
+    image:
+      "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?auto=format&fit=crop&q=80&w=800",
+  },
+  wide: {
+    title: "Convergent Billing System",
+    year: "2022-2023",
+    client: "MPT & KSGM",
+    desc: "Supply of critical servers and telecom equipment for Convergent Billing System operations.",
+    // Data Center / Servers နှင့်သက်ဆိုင်သောပုံ
+    image:
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800",
+  },
+  tall: {
+    title: "E-Animal Health Certificate System",
+    year: "Current",
+    client: "LBVD",
+    desc: "Online Application & Approval Workflow, Digital Certificate Issuance, and Role-based Admin Portal.",
+    // Digital Workflow / Application နှင့်သက်ဆိုင်သောပုံ
+    image:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800",
+  },
+};
 
-export function ProjectReferencesSection(): React.JSX.Element {
-  const { handleMouseEnter, handleMouseLeave } = useCursorHover();
+export default function FeaturedProjectsSection(): React.JSX.Element {
   return (
-    // 💡 နောက်ခံကို မျက်စိအေးစေမယ့် မီးခိုးဖျော့ (Very Light Gray/Slate) အရောင်ပြောင်းထားပါသည် bg-[#F8FAFC]
-    <section className="relative py-24 md:py-32 " id="projects">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        {/* Editorial Layout: Left Sticky Header, Right Scrolling Cards */}
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
-          {/* =======================
-              Left Column: Sticky Header
-              ======================= */}
-          <div className="lg:w-1/3 relative">
-            <div className="lg:sticky lg:top-32">
-              <span className="inline-flex items-center gap-2 text-blue-600 font-bold tracking-widest uppercase text-xs mb-6">
-                <span className="w-8 h-[2px] bg-blue-600"></span>
-                Our Masterpieces
-              </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
-                Featured <br className="hidden lg:block" />
-                Projects.
-              </h2>
-              <p className="text-base text-gray-500 leading-relaxed max-w-sm mb-10">
-                Delivering high-impact, national-scale infrastructure and
-                telecom solutions for critical government sectors.
-              </p>
+    <section className="py-24 px-4 sm:px-6 overflow-hidden bg-white">
+      <div className="m mx-auto">
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="mb-16">
+          <span className="text-[10px] font-bold tracking-widest text-gray-400 mb-4 block uppercase">
+            [ OUR WORK ]
+          </span>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight mb-4">
+            Featured Projects.
+          </h2>
+          <p className="text-gray-500 text-sm md:text-base font-medium max-w-xl">
+            Delivering end-to-end digital solutions and enterprise-level
+            infrastructure across Myanmar.
+          </p>
+        </motion.div>
 
-              {/* Explore More Button (Optional) */}
-              {/* <div className="hidden lg:flex items-center gap-2 text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors cursor-pointer group">
-                View all case studies
-                <ArrowLongRightIcon className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
-              </div> */}
-            </div>
-          </div>
-
-          {/* =======================
-              Right Column: Project Cards
-              ======================= */}
-          <div className="lg:w-2/3 flex flex-col gap-10">
-            {projectsData.map((project: ProjectItem) => (
-              <div
-                onMouseEnter={(e) => handleMouseEnter(e)}
-                onMouseLeave={handleMouseLeave}
-                key={project.id}
-                className="group relative bg-white p-8 md:p-12 rounded-3xl border border-gray-200 shadow-sm  transition-all overflow-hidden">
-                {/* 💡 Watermark ကို သေချာလေး ပြန်ချိန်ပေးထားပါသည် */}
-                <div className="absolute -right-8 -bottom-8 md:-right-12 md:-bottom-12 z-0 pointer-events-none select-none transition-all duration-700 ">
-                  <BuildingLibraryIcon className="w-48 h-48 md:w-64 md:h-64 xl:w-100 xl:h-100 text-gray-50  transition-colors duration-700 stroke-1" />
+        {/* =======================================
+            MAIN GRID: 12 Columns Total
+            Left = 7 Cols, Right = 5 Cols
+            ======================================= */}
+        <div className="border p-6 border-gray-300 rounded-[56px] bg-gray-200/50 ">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            {/* 💡 LEFT SIDE: col-span-7 */}
+            <div className="lg:col-span-7 flex flex-col gap-6">
+              {/* ROW 1: (Span 3 + Span 4) */}
+              <div className="grid grid-cols-1 md:grid-cols-7 gap-6">
+                <div className="md:col-span-3 aspect-square">
+                  <ProjectCard data={projects.small1} />
                 </div>
-
-                {/* 💡 Hover လုပ်မှသာ ပေါ်လာမယ့် ခပ်ဖျော့ဖျော့ Gradient Glow Effect */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-linear-to-bl from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl pointer-events-none"></div>
-
-                <div className="relative z-10">
-                  {/* Icon & Status */}
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-6 mb-10">
-                    <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center border border-gray-100 group-hover:scale-110 group-hover:bg-blue-50/50 transition-all duration-500">
-                      {project.icon}
-                    </div>
-                    <span
-                      className={`px-4 py-1.5 text-xs font-bold rounded-full border tracking-wide uppercase ${project.statusColor}`}>
-                      {project.status}
-                    </span>
-                  </div>
-
-                  {/* Client Info */}
-                  <div className="flex items-center text-sm font-semibold text-gray-500 mb-4">
-                    <span>{project.client}</span>
-                  </div>
-
-                  {/* Project Title */}
-                  <h3 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-5 tracking-tight group-hover:text-blue-600 transition-colors duration-300">
-                    {project.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-base text-gray-600 leading-relaxed mb-10">
-                    {project.description}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 pt-8 border-t border-gray-100">
-                    {project.tags.map((tag: ProjectTag, index: number) => {
-                      // 💡 Tag များအတွက် အရောင်အစုံ ပါဝင်သော Array
-                      const tagColors: string[] = [
-                        "text-blue-600 bg-blue-50 border-blue-100 hover:bg-blue-600 hover:shadow-blue-600/20",
-                        "text-emerald-600 bg-emerald-50 border-emerald-100 hover:bg-emerald-600 hover:shadow-emerald-600/20",
-                        "text-purple-600 bg-purple-50 border-purple-100 hover:bg-purple-600 hover:shadow-purple-600/20",
-                        "text-amber-600 bg-amber-50 border-amber-100 hover:bg-amber-600 hover:shadow-amber-600/20",
-                        "text-rose-600 bg-rose-50 border-rose-100 hover:bg-rose-600 hover:shadow-rose-600/20",
-                      ];
-
-                      // 💡 အရောင်များကို အလှည့်ကျ ယူရန် (index % tagColors.length)
-                      const colorClass = tagColors[index % tagColors.length];
-
-                      return (
-                        <span
-                          key={index}
-                          className={`px-4 py-2 text-xs font-bold rounded-full border hover:text-white  transition-all duration-300 cursor-default ${colorClass}`}>
-                          {tag.name}
-                        </span>
-                      );
-                    })}
-                  </div>
+                <div className="md:col-span-4">
+                  <ProjectCard data={projects.small2} />
                 </div>
               </div>
-            ))}
+
+              {/* ROW 2: (Span 4 + Span 3) ပြောင်းပြန် */}
+              <div className="grid grid-cols-1 md:grid-cols-7 gap-6">
+                <div className="md:col-span-4">
+                  <ProjectCard data={projects.small3} />
+                </div>
+                <div className="md:col-span-3 aspect-square">
+                  <ProjectCard data={projects.small4} />
+                </div>
+              </div>
+
+              {/* ROW 3: အောက်ဆုံးက အပြည့် (Full Width) */}
+              <div className="w-full">
+                <ProjectCard data={projects.wide} />
+              </div>
+            </div>
+
+            {/* 💡 RIGHT SIDE: col-span-5 */}
+            <div className="lg:col-span-5 flex">
+              <div className="w-full h-full">
+                <ProjectCard data={projects.tall} isTall={true} />
+              </div>
+            </div>
           </div>
+        </div>
+
+{/* 32 + 24  */}
+        {/* =======================================
+            VIEW ALL PROJECTS BUTTON
+            ======================================= */}
+        <div className="mt-12 flex justify-center">
+          <Link
+            href="/projects"
+            className="inline-flex items-center justify-center px-8 py-3.5 border border-gray-200 rounded-full text-sm font-bold text-gray-900 bg-white hover:bg-gray-50 transition-colors w-full md:w-auto">
+            View All Projects
+            <svg
+              className="ml-2 w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>
+  );
+}
+// 💡 Project Card Component
+function ProjectCard({
+  data,
+  isTall = false,
+}: {
+  data: ProjectData;
+  isTall?: boolean;
+}) {
+  // ပုံပါ/မပါ စစ်ဆေးရန်
+  const hasImage = !!data.image;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      // 💡 relative နှင့် overflow-hidden ကိုအသုံးပြု၍ ပုံအား Card အပြည့်ဖြစ်စေရန် ထိန်းချုပ်ထားပါသည်
+      className={`relative overflow-hidden rounded-[2rem] border border-gray-200 p-6 md:p-8 flex flex-col transition-colors hover:border-blue-200 w-full h-full min-h-[250px] ${
+        isTall ? "min-h-[400px] lg:min-h-full" : ""
+      } ${hasImage ? "border-none" : "bg-white"}`}>
+      {/* =======================================
+          Background Image & Overlay (ပုံပါခဲ့လျှင်)
+          ======================================= */}
+      {hasImage && (
+        <>
+          {/* 💡 absolute inset-0 ဖြင့် ပုံကို သီးသန့်နေရာမယူစေဘဲ နောက်ခံအပြည့်ဖြစ်အောင် လုပ်ထားပါသည် */}
+          <img
+            src={data.image}
+            alt={data.title}
+            className="absolute inset-0 w-full h-full object-cover  z-0"
+          />
+          {/* စာသားများ ထင်ရှားစေရန် Gradient အလွှာပါးပါးခံပေးထားခြင်း */}
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent z-0"></div>
+        </>
+      )}
+
+      {/* ပုံမပါဘဲ isTall သာဖြစ်နေလျှင် မူလ SVG Placeholder ကို ပြသမည် */}
+      {!hasImage && isTall && (
+        <div className="w-full h-48 bg-[#F8F9FA] rounded-2xl mb-8 flex items-center justify-center text-gray-300 relative z-10">
+          <svg
+            className="w-10 h-10"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1.5}
+              d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+            />
+          </svg>
+        </div>
+      )}
+
+      {/* =======================================
+          Text Content (စာသားများ)
+          ======================================= */}
+      {/* 💡 relative z-10 ဖြင့် စာသားများကို ပုံအပေါ်မှ ပေါ်စေပါသည် */}
+      <div className="flex flex-col flex-grow  justify-end-safe relative z-10">
+        {/* <span
+          className={`text-[10px] font-bold tracking-widest mb-3 uppercase block ${
+            hasImage ? "text-gray-300" : "text-gray-400"
+          }`}>
+          [ {data.client} • {data.year} ]
+        </span> */}
+        <h4
+          className={`text-xl md:text-2xl font-extrabold mb-3 tracking-tight ${
+            hasImage ? "text-white" : "text-gray-900"
+          }`}>
+          {data.title}
+        </h4>
+        <p
+          className={`text-sm leading-relaxed font-medium  ${
+            hasImage ? "text-gray-200" : "text-gray-500"
+          }`}>
+          {data.desc}
+        </p>
+      </div>
+    </motion.div>
   );
 }
