@@ -6,74 +6,78 @@ import Link from "next/link";
 
 // 💡 any Error မတက်စေရန် ProjectData Type ကို အတိအကျ ကြေညာထားပါသည်
 // 💡 image?: string ကို ထပ်တိုးထားပါသည်
+
+
+// 💡 Type အတိအကျ ကြေညာထားပါသည် (any လုံးဝ မပါဝင်ပါ)
 type ProjectData = {
+  company: "East Wind Myanmar" | "NK Venus";
   title: string;
   year: string;
   client: string;
   desc: string;
-  image?: string;
+  image: string;
 };
 
 const projects: Record<string, ProjectData> = {
   small1: {
+    company: "East Wind Myanmar",
     title: "CEIR Project",
     year: "2024",
     client: "MoPF / MOTC",
-    desc: "Central Equipment Identity Register.",
+    desc: "Central Equipment Identity Register implementation to monitor and manage mobile devices.",
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1920",
   },
   small2: {
+    company: "East Wind Myanmar",
     title: "EIR Project",
     year: "2024",
     client: "MPT, U9, ATOM",
-    desc: "National Equipment Identity Register for mobile operators.",
-    // Telecom / Network နှင့်သက်ဆိုင်သောပုံ
+    desc: "National Equipment Identity Register specifically tailored for top mobile operators.",
     image:
-      "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=1920",
   },
   small3: {
+    company: "East Wind Myanmar",
     title: "Surveillance System",
     year: "2025",
     client: "PTD",
-    desc: "Advanced CCTV systems & control frameworks.",
-    // CCTV / Surveillance နှင့်သက်ဆိုင်သောပုံ
+    desc: "Deployment of advanced CCTV systems integrated with a centralized control framework.",
     image:
-      "https://images.unsplash.com/photo-1549109926-58f039549485?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1549109926-58f039549485?auto=format&fit=crop&q=80&w=1920",
   },
   small4: {
+    company: "East Wind Myanmar",
     title: "24/7 Tech Support",
     year: "2025",
     client: "IRD",
-    desc: "24/7 Technical Support Center Solution.",
-    // Tech Support / Helpdesk နှင့်သက်ဆိုင်သောပုံ
+    desc: "A fully operational technical support center designed to provide uninterrupted IT assistance.",
     image:
-      "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?auto=format&fit=crop&q=80&w=1920",
   },
   wide: {
+    company: "NK Venus",
     title: "Convergent Billing System",
     year: "2022-2023",
     client: "MPT & KSGM",
-    desc: "Supply of critical servers and telecom equipment for Convergent Billing System operations.",
-    // Data Center / Servers နှင့်သက်ဆိုင်သောပုံ
+    desc: "Supply, installation, and maintenance of critical servers and telecom equipment.",
     image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1920",
   },
   tall: {
-    title: "E-Animal Health Certificate System",
-    year: "Current",
-    client: "LBVD",
-    desc: "Online Application & Approval Workflow, Digital Certificate Issuance, and Role-based Admin Portal.",
-    // Digital Workflow / Application နှင့်သက်ဆိုင်သောပုံ
+    company: "NK Venus",
+    title: "Device Management System",
+    year: "2024",
+    client: "Telecom Sector",
+    desc: "Implementation of a centralized system to configure, update, and manage network devices remotely.",
     image:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1920",
   },
 };
-
 export default function FeaturedProjectsSection(): React.JSX.Element {
   return (
     <section className="py-24 px-4 sm:px-6 overflow-hidden bg-white">
-      <div className="m mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
