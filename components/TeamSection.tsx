@@ -17,7 +17,7 @@ const teamData: TeamItem[] = [
     label: "SYSTEM DESIGN",
     title: "System Engineers",
     desc: "Architecture Planning. Detailed Requirements Analysis. Seamless System Integration.",
-    img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=800",
+    img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: "network",

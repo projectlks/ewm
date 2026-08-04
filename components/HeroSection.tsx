@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
-import gsap from "gsap";
 import {
   SignalIcon,
   ServerStackIcon,
@@ -32,7 +31,7 @@ const serviceCards: CardData[] = [
   },
   {
     id: "telecom",
-    title: "Telecom Setup",
+    title: "Telecom ",
     subtitle: "Seamless Integration",
     icon: <SignalIcon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
     positionClasses: "bottom-[0%] left-[0%]  xl:bottom-[15%] xl:left-[0%]",
@@ -155,7 +154,7 @@ const HeroSection: React.FC = () => {
               typingSpeed={75}
               pauseDuration={1500}
               showCursor
-              cursorCharacter="_"         
+              cursorCharacter="_"
               deletingSpeed={50}
               // variableSpeedEnabled={false}
               // variableSpeedMin={60}
@@ -176,22 +175,27 @@ const HeroSection: React.FC = () => {
             progress across the nation.
           </motion.p>
 
+   
+
           <motion.div
             variants={slideUpVariants}
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-30 w-full sm:w-auto px-4 sm:px-0">
+            {/* Primary Button: Contact သို့ သွားမည် */}
             <Link
-              href="#"
-              className="group relative inline-flex items-center justify-center w-full sm:w-auto px-5 py-3 sm:px-6 sm:py-3 bg-gray-900 text-white font-bold rounded-full overflow-hidden transition-transform  active:scale-95 ">
+              href="/contact"
+              className="group relative inline-flex items-center justify-center w-full sm:w-auto px-5 py-3 sm:px-6 sm:py-3 bg-gray-900 text-white font-bold rounded-full overflow-hidden transition-transform active:scale-95">
               <span className="relative z-10 flex items-center gap-2 text-sm">
-                Explore Solutions
+                Let&apos;s Talk
                 <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
-            {/* <Link
-              href="/projects/ceir"
+
+            {/* Secondary Button: Projects အားလုံး စုထားသော Page သို့ သွားမည် */}
+            <Link
+              href="/projects"
               className="inline-flex items-center justify-center w-full sm:w-auto px-5 py-3 sm:px-6 sm:py-3 rounded-full border border-gray-200 text-gray-700 font-medium hover:bg-white transition-colors backdrop-blur-sm bg-white/50 shadow-sm text-sm">
-              View CEIR Project
-            </Link> */}
+              View Projects
+            </Link>
           </motion.div>
         </motion.div>
 

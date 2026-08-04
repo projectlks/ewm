@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 interface FooterLink {
   name: string;
@@ -14,31 +13,27 @@ interface FooterSection {
   links: FooterLink[];
 }
 
+// 💡 မရှိသော Page များကို ဖြုတ်ပြီး လက်ရှိ ရှိနေသော Page များနှင့် Legal နေရာချန်ထားသော Data သို့ ပြောင်းလဲထားပါသည်[cite: 6]
+// 💡 Company Profile ကို ဖြုတ်ပြီး ကျန်ရှိသော Menu များကို ၃ စု အချိုးကျ ခွဲထားပါသည်
 const footerData: FooterSection[] = [
   {
-    title: "Solutions",
+    title: "Navigation",
     links: [
-      { name: "E-Government", href: "/solutions/e-government" },
-      { name: "Telecom Setup", href: "/solutions/telecom" },
-      { name: "IT Infrastructure", href: "/solutions/it-infrastructure" },
-      { name: "AI & Data Centers", href: "/solutions/ai" },
+      { name: "Home", href: "/" },
+      { name: "Our Projects", href: "/projects" },
     ],
   },
   {
-    title: "Company",
+    title: "Support",
     links: [
-      { name: "About Us", href: "/about" },
-      { name: "Careers", href: "/careers" },
-      { name: "Contact", href: "/contact" },
-      { name: "News & Insights", href: "/news" },
+      { name: "Contact Us", href: "/contact" },
     ],
   },
   {
     title: "Legal",
     links: [
-      { name: "Privacy Policy", href: "/privacy" },
-      { name: "Terms of Service", href: "/terms" },
-      { name: "Cookie Policy", href: "/cookies" },
+      { name: "Privacy Policy", href: "/privacy" }, // 💡 Page အစစ်သို့ ချိတ်ဆက်ထားပါသည်
+      { name: "Terms of Service", href: "/terms" }, // 💡 Page အစစ်သို့ ချိတ်ဆက်ထားပါသည်
     ],
   },
 ];
@@ -87,14 +82,9 @@ export function Footer(): React.JSX.Element {
   return (
     <footer className="bg-[#0B1121] mt-20 pt-20 flex flex-col relative">
       {/* Top Section */}
-      {/* Top Section */}
       <div className="mx-auto px-4 md:px-6 w-full mb-10 z-10">
         <div className="flex flex-col md:flex-row items-start justify-between gap-12">
-
-
           <div className="">
-            {/* <Image src="/logo.png"  alt="logo" width={200} height={200} /> */}
-
             <p className="text-gray-400 font-sans text-sm md:text-base leading-relaxed max-w-sm pr-4">
               Empowering Myanmar&apos;s digital future through highly
               interoperable systems, cutting-edge IT infrastructure, and robust
@@ -102,7 +92,6 @@ export function Footer(): React.JSX.Element {
             </p>
           </div>
 
-          {/* Space အကွာအဝေးများကို Responsive ဖြစ်အောင် ပြင်ဆင်ထားပါသည် */}
           <div className="flex flex-col md:flex-row md:w-1/2 md:max-w-[800px] justify-between space-y-12 md:space-y-0 md:space-x-12">
             {footerData.map((section: FooterSection, index: number) => (
               <div key={index} className="flex-1">
@@ -131,12 +120,6 @@ export function Footer(): React.JSX.Element {
         GIANT TYPOGRAPHY SECTION
         ====================================================
       */}
-      {/* 
-        ပြောင်းလဲထားချက်များ-
-        ၁။ Height (h-[...]) ကန့်သတ်ချက်များ အားလုံးကို ဖယ်ရှားလိုက်ပါသည်။
-        ၂။ စာသားမှ absolute နေရာယူမှုကို ဖယ်ရှားလိုက်ပါသည်။
-        ၃။ leading-none ဖြင့် အပေါ်အောက် နေရာလွတ်ကို အံဝင်ခွင်ကျ ဖြစ်စေပါသည်။ 
-      */}
       <div
         className="flex w-full items-center justify-center overflow-hidden px-2 mt-8 md:mt-12"
         ref={containerRef}>
@@ -159,8 +142,6 @@ export function Footer(): React.JSX.Element {
               reserved.
             </p>
           </div>
-
-    
         </div>
       </div>
     </footer>

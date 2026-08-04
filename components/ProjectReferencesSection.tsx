@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -19,14 +17,22 @@ type ProjectData = {
 };
 
 const projects: Record<string, ProjectData> = {
+  // small1: {
+  //   company: "East Wind Myanmar",
+  //   title: "CEIR Project",
+  //   year: "2024",
+  //   client: "MoPF / MOTC",
+  //   desc: "Central Equipment Identity Register implementation to monitor and manage mobile devices.",
+  //   image: "/ceir.png",
+  // },
   small1: {
-    company: "East Wind Myanmar",
-    title: "CEIR Project",
+    company: "NK Venus",
+    title: "Device Management System",
     year: "2024",
-    client: "MoPF / MOTC",
-    desc: "Central Equipment Identity Register implementation to monitor and manage mobile devices.",
+    client: "Telecom Sector",
+    desc: "Implementation of a centralized system to configure, update, and manage network devices remotely.",
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1920",
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1920",
   },
   small2: {
     company: "East Wind Myanmar",
@@ -48,12 +54,12 @@ const projects: Record<string, ProjectData> = {
   },
   small4: {
     company: "East Wind Myanmar",
-    title: "24/7 Tech Support",
+    title: "24/7 Tech Support ",
     year: "2025",
     client: "IRD",
     desc: "A fully operational technical support center designed to provide uninterrupted IT assistance.",
     image:
-      "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?auto=format&fit=crop&q=80&w=1920",
+      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800",
   },
   wide: {
     company: "NK Venus",
@@ -65,14 +71,23 @@ const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1920",
   },
   tall: {
-    company: "NK Venus",
-    title: "Device Management System",
+    company: "East Wind Myanmar",
+    title: "CEIR Project",
     year: "2024",
-    client: "Telecom Sector",
-    desc: "Implementation of a centralized system to configure, update, and manage network devices remotely.",
-    image:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1920",
+    client: "MoPF / MOTC",
+    desc: "Central Equipment Identity Register implementation to monitor and manage mobile devices.",
+    image: "/ceir.png",
   },
+
+  // tall: {
+  //   company: "NK Venus",
+  //   title: "Device Management System",
+  //   year: "2024",
+  //   client: "Telecom Sector",
+  //   desc: "Implementation of a centralized system to configure, update, and manage network devices remotely.",
+  //   image:
+  //     "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1920",
+  // },
 };
 export default function FeaturedProjectsSection(): React.JSX.Element {
   return (
@@ -204,6 +219,10 @@ function ProjectCard({
         </>
       )}
 
+
+
+      
+
       {/* ပုံမပါဘဲ isTall သာဖြစ်နေလျှင် မူလ SVG Placeholder ကို ပြသမည် */}
       {!hasImage && isTall && (
         <div className="w-full h-48 bg-[#F8F9FA] rounded-2xl mb-8 flex items-center justify-center text-gray-300 relative z-10">
@@ -234,7 +253,7 @@ function ProjectCard({
           [ {data.client} • {data.year} ]
         </span> */}
         <h4
-          className={`text-xl md:text-2xl font-extrabold mb-3 tracking-tight ${
+          className={`text-xl  font-extrabold mb-3 tracking-tight ${
             hasImage ? "text-white" : "text-gray-900"
           }`}>
           {data.title}

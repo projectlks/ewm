@@ -268,8 +268,8 @@ export function CTASection(): React.JSX.Element {
         Ready to work with us?
       </h2>
       <p className="text-gray-500 text-sm md:text-base max-w-xl mb-10 leading-relaxed">
-        Let&apos;s discuss how East Wind Myanmar and NK Venus can help build and
-        secure your enterprise digital infrastructure.
+        Let&apos;s discuss how East Wind Myanmar can empower and secure your
+        enterprise digital infrastructure.
       </p>
       <Link
         href="/contact"

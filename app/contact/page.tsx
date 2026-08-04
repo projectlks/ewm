@@ -109,8 +109,7 @@ export default function ContactPage(): React.JSX.Element {
                 Yangon
               </h4>
               <p className="text-sm text-gray-500 leading-relaxed max-w-md">
-                No 506, Level 4, Building 16, MICT Park, Universities Hlaing
-                Campus, Hlaing Township.
+                MICT Park, Universities Hlaing Campus, Hlaing Township
               </p>
             </div>
 
@@ -130,8 +129,7 @@ export default function ContactPage(): React.JSX.Element {
                 Nay Pyi Taw
               </h4>
               <p className="text-sm text-gray-500 leading-relaxed max-w-md">
-                No. 5578, Thit Khwa 4th Street, Zawana Theikdi Ward,
-                Oattarathiri Township.
+                Zawana TheikdiWard, Oattarathiri Township
               </p>
             </div>
           </div>

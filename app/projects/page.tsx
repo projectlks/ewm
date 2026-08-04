@@ -3,8 +3,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-type CompanyType = "All" | "East Wind Myanmar" | "NK Venus";
-
 interface ProjectDetail {
   id: string;
   title: string;
@@ -26,12 +24,13 @@ const allProjects: ProjectDetail[] = [
     title: "CEIR Project",
     company: "East Wind Myanmar",
     category: "Identity Register",
-    client: "MOPF / MOTC",
+    client:
+      " Ministry of Planning and Finance, Ministry of Transport and Communications",
     year: "2024",
-    desc: "Central Equipment Identity Register implementation to monitor and manage mobile devices across the national network securely.",
+    desc: "Turnkey Central Equipment Identity Register solution delivering enterprise-level infrastructure to monitor, authenticate, and manage mobile devices across large-scale networks.",
     features: [
-      "National Database",
-      "Security Compliance",
+      "CENTRALIZED DATABASE",
+      "ENTERPRISE INFRASTRUCTURE",
       "Real-time Monitoring",
     ],
     image:
@@ -42,10 +41,10 @@ const allProjects: ProjectDetail[] = [
     title: "EIR Project",
     company: "East Wind Myanmar",
     category: "Telecom Infrastructure",
-    client: "MPT, U9, ATOM",
+    client: "MPT, U9, ATOM, MYTEL",
     year: "2024",
-    desc: "National Equipment Identity Register specifically tailored for top mobile operators to authenticate and validate device statuses.",
-    features: ["Operator Integration", "High Availability", "Device Tracking"],
+    desc: "Turnkey Equipment Identity Register solution delivering enterprise-level infrastructure to manage IMEI registration, authenticate devices, and maintain comprehensive white and blacklists for mobile operators.",
+    features: ["Operator Integration", "High Availability", " IMEI MANAGEMENT"],
     image:
       "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=1920",
   },
@@ -138,15 +137,11 @@ const allProjects: ProjectDetail[] = [
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1920",
   },
 ];
-export default function DetailedProjectsPage(): React.JSX.Element {
-  const [activeTab, setActiveTab] = useState<CompanyType>("All");
 
+export default function DetailedProjectsPage(): React.JSX.Element {
   // 💡 မည်သည့် Project ပွင့်နေသည်ကို မှတ်သားထားမည့် State (တစ်ခုတည်းသာ ပွင့်ခွင့်ပြုရန်)
-const [openProjectId, setOpenProjectId] = useState<string | null>(
-  allProjects[0].id,
-);
-  const filteredProjects = allProjects.filter((project) =>
-    activeTab === "All" ? true : project.company === activeTab,
+  const [openProjectId, setOpenProjectId] = useState<string | null>(
+    allProjects[0].id,
   );
 
   return (
@@ -157,49 +152,29 @@ const [openProjectId, setOpenProjectId] = useState<string | null>(
           <span className="text-[10px] font-bold tracking-widest text-gray-400 mb-6 block uppercase">
             [ PORTFOLIO ARCHIVE ]
           </span>
-          <h1 className=" mb-10 uppercase text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-[1.15]">
+          <h1 className="mb-10 uppercase text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-[1.15]">
             Selected <br /> Works.
           </h1>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 border-b border-gray-200 pb-12">
+          <div className=" border-b border-gray-200 pb-12">
+            {/* 💡 ရှင်းလင်းသွားစေရန် စာသားအကျယ်ကို အနည်းငယ် တိုးပေးထားပါသည် */}
             <p className="text-gray-500 text-base md:text-lg font-medium max-w-xl leading-relaxed">
               An in-depth look at our enterprise-level deployments,
               infrastructure designs, and software solutions executed by East
               Wind Myanmar and NK Venus.
             </p>
-
-            <div className="flex flex-wrap gap-3">
-              {(["All", "East Wind Myanmar", "NK Venus"] as CompanyType[]).map(
-                (tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => {
-                      setActiveTab(tab);
-                      setOpenProjectId(null); // Tab ပြောင်းလျှင် ပွင့်နေတာတွေကို ပိတ်ပစ်မည်
-                    }}
-                    className={`px-5 py-2 text-xs font-bold tracking-widest uppercase transition-colors border-b-2 ${
-                      activeTab === tab
-                        ? "border-gray-900 text-gray-900"
-                        : "border-transparent text-gray-400 hover:text-gray-600"
-                    }`}>
-                    {tab}
-                  </button>
-                ),
-              )}
-            </div>
           </div>
         </div>
 
         {/* DETAILED LIST SECTION */}
         <motion.div layout className="flex flex-col">
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
+            {/* 💡 Filter မလိုတော့သဖြင့် allProjects ကို တိုက်ရိုက် အသုံးပြုထားပါသည် */}
+            {allProjects.map((project) => (
               <AccordionProjectRow
                 key={project.id}
                 project={project}
-                // 💡 လက်ရှိ Project ID သည် ဖွင့်ထားသော ID နှင့် တူညီပါက ပွင့်မည်
                 isOpen={openProjectId === project.id}
-                // 💡 Click နှိပ်လိုက်ပါက ၎င်း၏ ID ကို Parent ထံသို့ ပို့ပေးမည် (ပွင့်နေပြီးသားဆိုလျှင် null အဖြစ်ထား၍ ပိတ်မည်)
                 onToggle={() =>
                   setOpenProjectId(
                     openProjectId === project.id ? null : project.id,
@@ -214,7 +189,7 @@ const [openProjectId, setOpenProjectId] = useState<string | null>(
   );
 }
 
-// 💡 Props များတွင် isOpen နှင့် onToggle ကို ထပ်တိုးထားပါသည်
+// Props များတွင် isOpen နှင့် onToggle ကို ထပ်တိုးထားပါသည်
 function AccordionProjectRow({
   project,
   isOpen,
@@ -230,25 +205,20 @@ function AccordionProjectRow({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      // 💡 Local state အစား Parent မှ ပေးပို့သော onToggle ကို သုံးပါသည်
       onClick={onToggle}
-      className={`group relative flex flex-col py-12 lg:py-16 border-b border-gray-200 transition-colors cursor-pointer
-        
-
-      
-      `}>
-      {/* 💡 Top Section */}
+      className={`group relative flex flex-col py-12 lg:py-16 border-b border-gray-200 transition-colors cursor-pointer`}>
+      {/* Top Section */}
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start w-full relative z-10">
         {/* 1. Metadata Column */}
         <div className="w-full lg:w-1/4 flex flex-col gap-4">
-          <span
+          {/* <span
             className={`self-start inline-block px-2 py-1 text-[9px] font-bold tracking-widest uppercase border transition-colors ${
               project.company === "NK Venus"
                 ? "text-purple-700 border-purple-200 bg-purple-50 group-hover:bg-transparent"
                 : "text-blue-700 border-blue-200 bg-blue-50 group-hover:bg-transparent"
             }`}>
             {project.company}
-          </span>
+          </span> */}
           <div>
             <p className="text-[10px] font-bold tracking-widest text-gray-400 uppercase mb-1">
               Year
@@ -279,41 +249,6 @@ function AccordionProjectRow({
 
         {/* 3. Detail & Features Column */}
         <div className="w-full lg:w-5/12 flex flex-col justify-between h-full pr-8 relative">
-          {/* 💡 Plus/Minus Icon (စာသားတန်း၏ ညာဘက်အစွန်တွင် အလွယ်တကူ မြင်နိုင်စေရန် ပြင်ဆင်ထားသည်) */}
-          <div className="flex items-center justify-end mt-6 lg:mt-0 text-gray-400  group-hover:text-gray-900">
-            <motion.div
-              animate={{ rotate: isOpen ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
-              className=" w-fit p-1 rounded-full border border-gray-300 group-hover:border-gray-900">
-              {isOpen ? (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M20 12H4"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M12 4v16m8-8H4"
-                  />
-                </svg>
-              )}
-            </motion.div>
-          </div>
           <p className="text-sm text-gray-500 leading-relaxed font-medium mb-8">
             {project.desc}
           </p>
@@ -322,51 +257,17 @@ function AccordionProjectRow({
             {project.features.map((feature, i) => (
               <span
                 key={i}
-                className="px-3 py-1.5 bg-white border border-gray-200 text-gray-600 text-[10px] font-bold tracking-widest uppercase rounded-full">
+                className="px-3 py-1.5 bg-white border  transition-colors border-gray-200 text-gray-600 text-[10px] font-bold tracking-widest uppercase rounded-full">
                 {feature}
               </span>
+              // hover:bg-gray-950 hover:text-gray-100
             ))}
           </div>
-
-          {/* 💡 Plus/Minus Icon */}
-          {/* <div className="absolute top-0 right-0 lg:top-1/2 lg:-translate-y-1/2 text-gray-400 transition-colors group-hover:text-gray-900">
-            <motion.div
-              animate={{ rotate: isOpen ? 180 : 0 }}
-              transition={{ duration: 0.3 }}>
-              {isOpen ? (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M20 12H4"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M12 4v16m8-8H4"
-                  />
-                </svg>
-              )}
-            </motion.div>
-          </div> */}
         </div>
       </div>
 
-      {/* 💡 Expandable Image Section */}
-      <AnimatePresence initial={false}>
+      {/* Expandable Image Section */}
+      {/* <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
@@ -383,7 +284,7 @@ function AccordionProjectRow({
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </motion.div>
   );
 }

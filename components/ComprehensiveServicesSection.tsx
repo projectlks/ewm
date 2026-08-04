@@ -46,9 +46,9 @@ const servicesData: ServiceCategory[] = [
     number: "03",
     title: "Maintenance & Support",
     description:
-      "Ongoing maintenance and highly responsive technical support to keep your critical operations running 24/7.",
+      "Ongoing preventive and corrective maintenance, alongside highly responsive technical support, to keep your critical operations running 24/7.",
     items: [
-      { name: "Preventive & Corrective Maintenance" },
+      { name: "NOC & SOC Monitoring and Support" },
       { name: "24/7 Helpdesk & Remote Support" },
       { name: "On-site Troubleshooting & Repair" },
     ],

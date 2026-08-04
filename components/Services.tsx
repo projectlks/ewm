@@ -1,6 +1,6 @@
-"use client";
 
-import React, { useEffect, useRef } from "react";
+
+
 import { motion, Variants } from "framer-motion";
 import {
   ShieldCheckIcon,
@@ -8,7 +8,6 @@ import {
   ServerStackIcon,
   CpuChipIcon,
 } from "@heroicons/react/24/outline";
-import gsap from "gsap";
 import { useCursorHover } from "@/hook/useCursorHover";
 
 interface BentoItem {
@@ -34,7 +33,7 @@ const bentoData: BentoItem[] = [
   {
     id: "telecom",
     number: "02",
-    title: "Telecom Setup",
+    title: "Telecom ",
     description:
       "Seamless connectivity and infrastructure integration for advanced telecommunication networks.",
     icon: <SignalIcon />,
