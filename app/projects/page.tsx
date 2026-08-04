@@ -157,7 +157,7 @@ const [openProjectId, setOpenProjectId] = useState<string | null>(
           <span className="text-[10px] font-bold tracking-widest text-gray-400 mb-6 block uppercase">
             [ PORTFOLIO ARCHIVE ]
           </span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-gray-900 tracking-tighter leading-none mb-10 uppercase">
+          <h1 className=" mb-10 uppercase text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-[1.15]">
             Selected <br /> Works.
           </h1>
 

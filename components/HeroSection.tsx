@@ -95,9 +95,9 @@ const HeroSection: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        delay: 3.2,
+        // delay: 3.2,
         staggerChildren: 0.2,
-        delayChildren: 3.5,
+        // delayChildren: 3.5,
       },
     },
   };
@@ -116,10 +116,10 @@ const HeroSection: React.FC = () => {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.8, ease: "easeOut", delay: 4.0 },
+      transition: { duration: 0.8, ease: "easeOut", },
     },
   };
-
+// delay: 4.0; 
   return (
     <section
       aria-label="Hero Section"

@@ -1,8 +1,10 @@
 "use client"
+// import AboutSection from '@/components/AboutSection';
 import { AboutSection } from '@/components/AboutSection';
 import { BusinessLineUpSection } from '@/components/BusinessLineUpSection';
 import { ComprehensiveServicesSection } from '@/components/ComprehensiveServicesSection';
-import { ContactSection } from '@/components/ContactSection';
+import { CTASection } from '@/components/ContactSection';
+// import  ContactSection from '@/components/ContactSection';
 import { CoreValuesSection } from '@/components/CoreValuesSection';
 import CustomerSupportSection from '@/components/CustomerSupportSection';
 import HeroSection from '@/components/HeroSection'
@@ -17,7 +19,6 @@ const page = () => {
   return (
     <>
       {/* <Home /> */}
-
       <HeroSection />
       <AboutSection />
       <ServicesSection />
@@ -28,7 +29,7 @@ const page = () => {
       <ComprehensiveServicesSection />
       <ProjectReferencesSection />
       <CoreValuesSection />
-      <ContactSection />
+      <CTASection />
     </>
   );
 }
