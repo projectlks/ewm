@@ -34,7 +34,7 @@ export async function sendContactEmail(formData: FormData): Promise<EmailRespons
       
       <!-- Header Section -->
       <div style="background-color: #111827; padding: 24px; text-align: center;">
-        <h2 style="color: #FFFFFF; margin: 0; font-size: 20px; letter-spacing: 1px; text-transform: uppercase;">East Wind Myanmar</h2>
+        <h2 style="color: #FFFFFF; margin: 0; font-size: 20px; letter-spacing: 1px; text-transform: uppercase;">EastWind Myanmar</h2>
         <p style="color: #9CA3AF; margin: 8px 0 0 0; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">New Website Inquiry</p>
       </div>
       

@@ -138,8 +138,7 @@ export default function DetailedProjectsPage(): React.JSX.Element {
           <div className="border-b border-gray-200 pb-12">
             <p className="text-gray-500 text-base md:text-lg font-medium max-w-xl leading-relaxed">
               An in-depth look at our enterprise-level deployments,
-              infrastructure designs, and software solutions executed by East
-              Wind Myanmar.
+              infrastructure designs, and software solutions executed by EastWind Myanmar.
             </p>
           </div>
         </div>

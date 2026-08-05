@@ -25,22 +25,22 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://eastwindmyanmar.com.mm"),
   title: {
-    default: "East Wind Myanmar | Enterprise Infrastructure Solutions",
-    template: "%s | East Wind Myanmar",
+    default: "EastWind Myanmar | Enterprise Infrastructure Solutions",
+    template: "%s | EastWind Myanmar",
   },
   description:
     "Delivering end-to-end digital solutions and enterprise-level infrastructure across Myanmar.",
   keywords: [
-    "East Wind Myanmar",
+    "EastWind Myanmar",
     "Telecom Infrastructure",
     "CEIR",
     "Myanmar Tech",
   ],
   openGraph: {
-    title: "East Wind Myanmar",
+    title: "EastWind Myanmar",
     description: "Enterprise-level infrastructure and digital solutions.",
     url: "https://eastwindmyanmar.com.mm",
-    siteName: "East Wind Myanmar",
+    siteName: "EastWind Myanmar",
     locale: "en_US",
     type: "website",
   },
@@ -56,23 +56,23 @@ export const metadata: Metadata = {
   //   "Digital Infrastructure",
   //   "Network Infrastructure",
   // ],
-  authors: [{ name: "East Wind Myanmar" }],
+  authors: [{ name: "EastWind Myanmar" }],
   icons: {
     // 💡 Favicon ကို logo.png အဖြစ် ပြောင်းလဲသတ်မှတ်ထားပါသည်
     icon: "/logo.png",
     apple: "/logo.png", // Apple devices များအတွက်
   },
   // openGraph: {
-  //   title: "East Wind Myanmar | Digital Infrastructure & IT Solutions",
+  //   title: "EastWind Myanmar | Digital Infrastructure & IT Solutions",
   //   description:
   //     "Empowering Myanmar's Digital Future through robust IT infrastructure, telecom solutions, and E-Government systems.",
-  //   siteName: "East Wind Myanmar",
+  //   siteName: "EastWind Myanmar",
   //   images: [
   //     {
   //       url: "/logo.png",
   //       width: 800,
   //       height: 600,
-  //       alt: "East Wind Myanmar Logo",
+  //       alt: "EastWind Myanmar Logo",
   //     },
   //   ],
   //   locale: "en_US",

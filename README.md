@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# East Wind Myanmar - Official Website
 
-## Getting Started
+This is the official enterprise website for **East Wind Myanmar Company Limited**, designed to showcase our comprehensive solutions in Equipment Supply, Information Technology, and seamless Telecommunication Implementation across Myanmar.
 
-First, run the development server:
+## 🚀 Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/) (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Email Service:** [Resend](https://resend.com/)
+- **Deployment:** [Vercel](https://vercel.com/)
+- **DNS/Security:** [Cloudflare](https://www.cloudflare.com/)
+
+## ✨ Key Features
+
+- **Enterprise UI/UX:** Clean, modern, and highly responsive design with ultra-white space.
+- **Dynamic Contact Form:** Integrated with Resend API for secure and automated email delivery.
+- **SEO Optimized:** Full Open Graph metadata, dynamically generated `sitemap.xml`, and `robots.txt`.
+- **Custom Error Handling:** Beautiful bespoke `404 Not Found` and `500 Server Error` boundaries.
+- **Type-Safe:** 100% strict TypeScript implementation.
+
+## 🛠️ Getting Started
+
+Follow these instructions to set up the project locally.
+
+### 1. Prerequisites
+Make sure you have installed:
+- [Node.js](https://nodejs.org/en/) (v18.17 or later)
+- npm, yarn, or pnpm
+
+### 2. Installation
+Clone the repository and install dependencies:
+
+```bash
+git clone <your-repository-url>
+cd east-wind-myanmar
+npm install
+```
+
+### 3. Environment Variables
+Create a `.env.local` file in the root directory and add the necessary API keys:
+
+```env
+# Resend API key for contact form emails
+RESEND_API_KEY=your_resend_api_key_here
+```
+
+### 4. Running the Development Server
+Start the local development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📂 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```text
+east-wind-myanmar/
+├── app/
+│   ├── (pages)/        # Public pages (Home, About, Contact, etc.)
+│   ├── privacy/        # Privacy Policy page
+│   ├── terms/          # Terms of Service page
+│   ├── layout.tsx      # Root layout and metadata
+│   ├── error.tsx       # Global error boundary
+│   ├── not-found.tsx   # Custom 404 page
+│   ├── sitemap.ts      # Dynamic sitemap generation
+│   └── robots.ts       # Robots.txt configuration
+├── components/         # Reusable UI components
+├── hook/               # Custom React hooks (e.g., useCursorHover)
+├── public/             # Static assets (Images, Icons, etc.)
+└── ...configuration files
+```
 
-## Learn More
+## 🌐 Deployment
 
-To learn more about Next.js, take a look at the following resources:
+This project is optimized for deployment on [Vercel](https://vercel.com/). 
+1. Push the code to GitHub/GitLab.
+2. Import the project in Vercel.
+3. Add the `RESEND_API_KEY` in the Vercel Environment Variables settings.
+4. Deploy.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Developed for East Wind Myanmar's Digital Future.*
