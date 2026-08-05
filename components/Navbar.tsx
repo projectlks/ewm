@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
           ? "bg-white md:bg-white/95 backdrop-blur-xl "
           : "bg-white md:bg-transparent"
       }`}>
-      <div className="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto py-3 px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo Section */}
           <Link href="/" className="shrink-0 flex items-center group">

@@ -16,8 +16,9 @@ const coreValuesData: CoreValue[] = [
     description:
       "We prioritize our clients' needs, ensuring satisfaction, trust, and long-term success through dedicated support.",
 
-    imageUrl:
-      "https://images.unsplash.com/photo-1453904300235-0f2f60b15b5d?auto=format&fit=crop&q=80&w=800",
+    // imageUrl:
+    imageUrl: "/3.jpg", // Professional Handshake / Trust
+    // "https://images.unsplash.com/photo-1453904300235-0f2f60b15b5d?auto=format&fit=crop&q=80&w=800",
   },
 
   {
@@ -33,7 +34,8 @@ const coreValuesData: CoreValue[] = [
     title: "Integrity & Quality",
     description:
       "Upholding the highest ethical standards while delivering premium, reliable, and standardized results.",
-    imageUrl: "/3.jpg", // Professional Handshake / Trust
+    imageUrl:
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1920", // Professional Handshake / Trust
   },
   {
     id: "sustainability",

@@ -186,7 +186,7 @@ export function AboutSection(): React.JSX.Element {
             className="col-span-1 bg-gray-100 rounded-[1.5rem] border border-gray-100 overflow-hidden relative min-h-[280px] lg:min-h-full transition-all duration-300 ">
             {/* 💡 Unsplash မှ Digital/Tech ပုံအား တိုက်ရိုက် ထည့်သွင်းထားပါသည် */}
             <Image
-              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1920"
               alt="East Wind Myanmar Team"
               fill
               unoptimized
