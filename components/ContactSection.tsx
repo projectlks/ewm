@@ -273,7 +273,7 @@ export function CTASection(): React.JSX.Element {
       </p>
       <Link
         href="/contact"
-        className="px-10 py-4 bg-blue-600 text-white text-sm font-bold uppercase tracking-widest rounded-full hover:bg-gray-900 transition-colors duration-300 ">
+        className="px-10 py-4 hover:bg-blue-600 text-white text-sm font-bold uppercase tracking-widest rounded-full bg-gray-900 transition-colors duration-300 ">
         Let&apos;s Talk
       </Link>
     </section>

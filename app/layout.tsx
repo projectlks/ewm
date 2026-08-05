@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import { SplashScreen } from "@/components/SplashScreen";
 import { Footer } from "@/components/Footer";
 import Cursor from "@/components/Cursor";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -22,40 +23,61 @@ const inter = Inter({
 
 // 💡 SEO နှင့် Social Media Share များအတွက် လိုက်ဖက်သော Metadata များ ထည့်သွင်းထားပါသည်
 export const metadata: Metadata = {
-  title: "East Wind Myanmar | Digital Infrastructure & IT Solutions",
+  metadataBase: new URL("https://eastwindmyanmar.com.mm"),
+  title: {
+    default: "East Wind Myanmar | Enterprise Infrastructure Solutions",
+    template: "%s | East Wind Myanmar",
+  },
   description:
-    "Empowering Myanmar's Digital Future. We provide foundational technology solutions, seamless telecom implementation, and highly interoperable systems tailored for your needs.",
+    "Delivering end-to-end digital solutions and enterprise-level infrastructure across Myanmar.",
   keywords: [
     "East Wind Myanmar",
-    "IT Solutions Myanmar",
-    "Telecom Setup Myanmar",
-    "E-Government Solutions",
-    "Data Centers",
-    "Digital Infrastructure",
-    "Network Infrastructure",
+    "Telecom Infrastructure",
+    "CEIR",
+    "Myanmar Tech",
   ],
+  openGraph: {
+    title: "East Wind Myanmar",
+    description: "Enterprise-level infrastructure and digital solutions.",
+    url: "https://eastwindmyanmar.com.mm",
+    siteName: "East Wind Myanmar",
+    locale: "en_US",
+    type: "website",
+  },
+  // title: "East Wind Myanmar | Digital Infrastructure & IT Solutions",
+  // description:
+  //   "Empowering Myanmar's Digital Future. We provide foundational technology solutions, seamless telecom implementation, and highly interoperable systems tailored for your needs.",
+  // keywords: [
+  //   "East Wind Myanmar",
+  //   "IT Solutions Myanmar",
+  //   "Telecom Setup Myanmar",
+  //   "E-Government Solutions",
+  //   "Data Centers",
+  //   "Digital Infrastructure",
+  //   "Network Infrastructure",
+  // ],
   authors: [{ name: "East Wind Myanmar" }],
   icons: {
     // 💡 Favicon ကို logo.png အဖြစ် ပြောင်းလဲသတ်မှတ်ထားပါသည်
     icon: "/logo.png",
     apple: "/logo.png", // Apple devices များအတွက်
   },
-  openGraph: {
-    title: "East Wind Myanmar | Digital Infrastructure & IT Solutions",
-    description:
-      "Empowering Myanmar's Digital Future through robust IT infrastructure, telecom solutions, and E-Government systems.",
-    siteName: "East Wind Myanmar",
-    images: [
-      {
-        url: "/logo.png",
-        width: 800,
-        height: 600,
-        alt: "East Wind Myanmar Logo",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
+  // openGraph: {
+  //   title: "East Wind Myanmar | Digital Infrastructure & IT Solutions",
+  //   description:
+  //     "Empowering Myanmar's Digital Future through robust IT infrastructure, telecom solutions, and E-Government systems.",
+  //   siteName: "East Wind Myanmar",
+  //   images: [
+  //     {
+  //       url: "/logo.png",
+  //       width: 800,
+  //       height: 600,
+  //       alt: "East Wind Myanmar Logo",
+  //     },
+  //   ],
+  //   locale: "en_US",
+  //   type: "website",
+  // },
 };
 
 export default function RootLayout({
@@ -75,6 +97,9 @@ export default function RootLayout({
         <Navbar />
         <main className="container mx-auto scroll-smooth">{children}</main>
         <Footer />
+
+        {/* 💡 ဒီနေရာမှာ တစ်ခါတည်း ထည့်ထားလိုက်ပါ */}
+        <ScrollToTop />
       </body>
     </html>
   );
