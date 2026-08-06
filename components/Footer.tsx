@@ -18,7 +18,7 @@ const footerData: FooterSection[] = [
     title: "Navigation",
     links: [
       { name: "Home", href: "/" },
-      { name: "Our Projects", href: "/projects" },
+      { name: "Our Solutions", href: "/solutions" },
     ],
   },
   {

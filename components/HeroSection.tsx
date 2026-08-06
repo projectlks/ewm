@@ -190,11 +190,11 @@ const HeroSection: React.FC = () => {
               </span>
             </Link>
 
-            {/* Secondary Button: Projects အားလုံး စုထားသော Page သို့ သွားမည် */}
+            {/* Secondary Button: Solutions အားလုံး စုထားသော Page သို့ သွားမည် */}
             <Link
-              href="/projects"
+              href="/solutions"
               className="inline-flex items-center justify-center w-full sm:w-auto px-5 py-3 sm:px-6 sm:py-3 rounded-full border border-gray-200 text-gray-700 font-medium hover:bg-white transition-colors backdrop-blur-sm bg-white/50 shadow-sm text-sm">
-              View Projects
+              View Solutions
             </Link>
           </motion.div>
         </motion.div>

@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 1, // ပင်မစာမျက်နှာဖြစ်သဖြင့် ဦးစားပေးအဆင့် အမြင့်ဆုံးထားပါသည်
         },
         {
-            url: `${baseUrl}/projects`,
+            url: `${baseUrl}/solutions`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
