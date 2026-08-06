@@ -328,7 +328,7 @@ export default function HomeFeaturedProjects(): React.JSX.Element {
             [ OUR WORK ]
           </span>
           <h2 className="mb-12 uppercase text-3xl md:text-4xl font-bold text-gray-900 tracking-tight ">
-            Featured Projects.
+            Featured Solutions.
           </h2>
    
             <p className="text-sm md:text-base text-gray-500 max-w-2xl leading-relaxed">
@@ -356,7 +356,7 @@ export default function HomeFeaturedProjects(): React.JSX.Element {
           <Link
             href="/projects"
             className="inline-flex items-center justify-center px-12 py-4 rounded-full text-sm font-bold text-gray-900 bg-white border border-gray-200 hover:border-gray-900 hover:bg-gray-50 transition-all duration-300 w-full md:w-auto">
-            View All Projects Archive
+            View All Solutions Archive
             <svg
               className="ml-4 w-4 h-4"
               fill="none"
