@@ -15,7 +15,7 @@ interface NavItem {
 // 💡 Menu (၃) ခု အချိုးကျညီညာစွာ ပါဝင်ပါမည်
 const navItems: NavItem[] = [
   { name: "Home", href: "/" },
-  { name: "Projects", href: "/projects" },
+  { name: "Solutions", href: "/solutions" },
   { name: "Contact", href: "/contact" },
 ];
 

@@ -82,9 +82,10 @@ export default function CustomerSupportSection(): React.JSX.Element {
               <Image
                 src="/contactUS.jpg"
                 alt="24/7 Customer Support Team"
-                className="w-full h-full object-cover"
+                className="object-cover"
                 fill
-             
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div>
             </div>
@@ -118,7 +119,9 @@ export default function CustomerSupportSection(): React.JSX.Element {
                   <h4 className="text-gray-900 font-extrabold text-lg tracking-tight">
                     Always On
                   </h4>
-                  <p className="text-blue-600 text-sm font-bold tracking-widest via-0%">24 / 7</p>
+                  <p className="text-blue-600 text-sm font-bold tracking-widest via-0%">
+                    24 / 7
+                  </p>
                 </div>
               </div>
 

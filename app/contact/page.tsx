@@ -301,9 +301,9 @@ export default function ContactPage(): React.JSX.Element {
                   Email
                 </span>
                 <a
-                  href="mailto:info@eastwindmyanmar.com.mm"
+                  href="mailto:support@eastwindmyanmar.com.mm"
                   className="text-lg md:text-xl font-medium text-gray-900 hover:text-blue-600 transition-colors break-all">
-                  info@eastwindmyanmar.com.mm
+                  support@eastwindmyanmar.com.mm
                 </a>
               </div>
               <div>

@@ -64,7 +64,7 @@ export async function sendContactEmail(formData: FormData): Promise<EmailRespons
     try {
         const { error } = await resend.emails.send({
             from: "East Wind Website <info@eastwindmyanmar.com.mm>",
-            to: ["info@eastwindmyanmar.com.mm", "support@eastwindmyanmar.com.mm"],
+            to: [ "support@eastwindmyanmar.com.mm"],
             replyTo: email,
             subject: subject ? `[Website Inquiry] ${subject}` : `New Inquiry from ${name}`,
             html: htmlTemplate,

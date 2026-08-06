@@ -275,7 +275,7 @@ interface ProjectDetail {
 const featuredProjects: ProjectDetail[] = [
   {
     id: "ew-1",
-    title: "CEIR Project",
+    title: "CEIR ",
     company: "East Wind Myanmar",
     category: "Identity Register",
     client:
@@ -291,7 +291,7 @@ const featuredProjects: ProjectDetail[] = [
   },
   {
     id: "ew-2",
-    title: "EIR Project",
+    title: "EIR ",
     company: "East Wind Myanmar",
     category: "Telecom Infrastructure",
     client: "MPT, ATOM, U9, MYTEL",

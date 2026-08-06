@@ -16,83 +16,39 @@ const coreValuesData: CoreValue[] = [
     title: "Customer Focus",
     description:
       "We prioritize our clients' needs, ensuring satisfaction, trust, and long-term success through dedicated support.",
-
-
-    imageUrl: "/core/1.jpg", 
-
+    imageUrl: "/core/1.jpg",
   },
-
   {
     id: "innovation",
     title: "Innovation",
     description:
       "Embracing cutting-edge technology and forward-thinking strategies to deliver modern, efficient solutions.",
-      imageUrl:
-        "/core/2.jpg", // Modern Tech / Innovation Team
+    imageUrl: "/core/2.jpg",
   },
   {
     id: "integrity-quality",
     title: "Integrity & Quality",
     description:
       "Upholding the highest ethical standards while delivering premium, reliable, and standardized results.",
-    imageUrl:
-      "/core/3.jpg", // Professional Handshake / Trust
+    imageUrl: "/core/3.jpg",
   },
   {
     id: "sustainability",
     title: "Sustainability",
     description:
       "Committed to environmentally friendly practices, renewable energy, and the long-term viability of our projects.",
-    imageUrl:
-      "/core/4.jpg", // Wind Turbines / Renewable Energy
+    imageUrl: "/core/4.jpg",
   },
   {
     id: "interoperability",
     title: "Interoperability",
     description:
       "Designing systems and infrastructure that seamlessly integrate, communicate, and work together flawlessly.",
-    imageUrl:
-      "/core/5.jpg", // Global Network Connections
+    imageUrl: "/core/5.jpg",
   },
 ];
 
-// const coreValuesData: CoreValue[] = [
-//   {
-//     id: "ethics-legality",
-//     title: "Ethics and Legality",
-//     description:
-//       "Ethics and legality are our foundations, the starting and ending point of a long-term project featuring a strong commitment to improvement, transparency, sustainability, and personal development.",
-//     imageUrl:
-//       "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=800",
-//   },
-//   {
-//     id: "excellence",
-//     title: "Excellence",
-//     description:
-//       "We want to delight our customers by creating extremely innovative, complete, and easy-to-use products, working quickly and efficiently to achieve the goals and objectives.",
-//     imageUrl:
-//       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-//   },
-//   {
-//     id: "digital-transformation",
-//     title: "Simplification & Digital Transformation",
-//     description:
-//       "We guide our Customers in building a more agile business, automating manual processes, and providing tools to measure results in process efficiency and resources optimization.",
-//     imageUrl:
-//       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
-//   },
-//   {
-//     id: "professionalism",
-//     title: "Individuality & Professionalism",
-//     description:
-//       "Intelligence, enthusiasm, and creativity are the key values of East Wind Myanmar's professionalism, aimed at continuous improvement to achieve ambitious goals.",
-//     imageUrl:
-//       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800",
-//   },
-// ];
-
 export function CoreValuesSection(): React.JSX.Element {
-  // ပထမဆုံး အကွက်ကို Default အနေဖြင့် ကျယ်နေစေရန် သတ်မှတ်ထားပါသည်
   const [activeId, setActiveId] = useState<string>("customer-focus");
 
   return (
@@ -109,12 +65,9 @@ export function CoreValuesSection(): React.JSX.Element {
           </p>
         </div>
 
-        {/* 
-          Interactive Expanding Layout
-          Mobile တွင် အပေါ်အောက်၊ Desktop တွင် ဘေးတိုက် ကျယ်လာမည့် ပုံစံဖြစ်ပါသည်
-        */}
         <div className="flex flex-col lg:flex-row gap-4 w-full h-[700px] lg:h-[500px]">
-          {coreValuesData.map((value) => {
+          {/* 💡 .map တွင် index ကိုပါ ထုတ်ယူထားပါသည် */}
+          {coreValuesData.map((value, index) => {
             const isActive = activeId === value.id;
 
             return (
@@ -122,8 +75,7 @@ export function CoreValuesSection(): React.JSX.Element {
                 key={value.id}
                 onMouseEnter={() => setActiveId(value.id)}
                 onClick={() => setActiveId(value.id)}
-                // Flex box ၏ flex-grow ကို အသုံးပြု၍ အကျယ်အဝန်းကို အသက်သွင်းထားပါသည်
-                className={`relative overflow-hidden rounded-[2rem] transition-all duration-700 ease-in-out relative cursor-pointer group flex flex-col justify-end
+                className={`relative overflow-hidden rounded-[2rem] transition-all duration-700 ease-in-out cursor-pointer group flex flex-col justify-end
                   ${isActive ? "flex-[5]" : "flex-[1]"}
                 `}>
                 {/* Background Image */}
@@ -132,20 +84,19 @@ export function CoreValuesSection(): React.JSX.Element {
                   alt={value.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   fill
+                  // 💡 Browser Warning ပျောက်စေရန် sizes ထည့်သွင်းထားပါသည်
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 60vw"
+                  // 💡 LCP Warning ပျောက်စေရန် ပထမဆုံးပုံ (index 0) အတွက်သာ priority အလုပ်လုပ်စေပါသည်
+                  priority={index === 0}
                 />
 
-                {/* Dark Overlay - Active ဖြစ်လျှင် ပိုမိုက်စေရန် */}
                 <div
                   className={`absolute inset-0 transition-all duration-700 
                   ${isActive ? "bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent" : "bg-gray-900/50 group-hover:bg-gray-900/30"}`}></div>
 
                 {/* Content Area */}
                 <div className="relative z-10 p-5 md:p-8 flex flex-col justify-end h-full">
-                  {/* Number & Title */}
                   <div className="flex items-center gap-4">
-                    {/* <span className="w-10 h-10 shrink-0 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white font-bold text-sm">
-                      0{index + 1}
-                    </span> */}
                     <h3
                       className={`text-xl md:text-2xl font-bold text-white whitespace-nowrap transition-all duration-700 ease-in-out
                         ${isActive ? "opacity-100 translate-x-0 w-auto" : "opacity-0 translate-x-4 w-0 overflow-hidden"}
@@ -154,7 +105,6 @@ export function CoreValuesSection(): React.JSX.Element {
                     </h3>
                   </div>
 
-                  {/* Description - Active ဖြစ်မှသာ ပေါ်လာပါမည် */}
                   <div
                     className={`overflow-hidden transition-all duration-700 ease-in-out
                       ${isActive ? "max-h-40 opacity-100 mt-3" : "max-h-0 opacity-0 mt-0"}

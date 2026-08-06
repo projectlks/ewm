@@ -13,8 +13,6 @@ interface FooterSection {
   links: FooterLink[];
 }
 
-// 💡 မရှိသော Page များကို ဖြုတ်ပြီး လက်ရှိ ရှိနေသော Page များနှင့် Legal နေရာချန်ထားသော Data သို့ ပြောင်းလဲထားပါသည်[cite: 6]
-// 💡 Company Profile ကို ဖြုတ်ပြီး ကျန်ရှိသော Menu များကို ၃ စု အချိုးကျ ခွဲထားပါသည်
 const footerData: FooterSection[] = [
   {
     title: "Navigation",
@@ -25,22 +23,19 @@ const footerData: FooterSection[] = [
   },
   {
     title: "Support",
-    links: [
-      { name: "Contact Us", href: "/contact" },
-    ],
+    links: [{ name: "Contact Us", href: "/contact" }],
   },
   {
     title: "Legal",
     links: [
-      { name: "Privacy Policy", href: "/privacy" }, // 💡 Page အစစ်သို့ ချိတ်ဆက်ထားပါသည်
-      { name: "Terms of Service", href: "/terms" }, // 💡 Page အစစ်သို့ ချိတ်ဆက်ထားပါသည်
+      { name: "Privacy Policy", href: "/privacy" },
+      { name: "Terms of Service", href: "/terms" },
     ],
   },
 ];
 
-export function Footer(): React.JSX.Element {
-  const currentYear = new Date().getFullYear();
-
+// 💡 Auto Resize လုပ်မည့် စာသားများအတွက် သီးသန့် Component အသေး ခွဲထုတ်လိုက်ပါသည်
+const GiantText = ({ text }: { text: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
 
@@ -49,9 +44,7 @@ export function Footer(): React.JSX.Element {
       const container = containerRef.current;
       const text = textRef.current;
 
-      if (!container || !text) {
-        return;
-      }
+      if (!container || !text) return;
 
       const containerWidth = container.offsetWidth;
       let min = 1;
@@ -78,6 +71,22 @@ export function Footer(): React.JSX.Element {
       window.removeEventListener("resize", resizeText);
     };
   }, []);
+
+  return (
+    <div
+      className="flex w-full items-center justify-center overflow-hidden px-2 mt-4 md:mt-6"
+      ref={containerRef}>
+      <span
+        className="whitespace-nowrap text-center font-heading font-black text-[#F4F4F5] uppercase leading-none select-none pointer-events-none"
+        ref={textRef}>
+        {text}
+      </span>
+    </div>
+  );
+};
+
+export function Footer(): React.JSX.Element {
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-[#0B1121] mt-20 pt-20 flex flex-col relative">
@@ -120,14 +129,9 @@ export function Footer(): React.JSX.Element {
         GIANT TYPOGRAPHY SECTION
         ====================================================
       */}
-      <div
-        className="flex w-full items-center justify-center overflow-hidden px-2 mt-8 md:mt-12"
-        ref={containerRef}>
-        <span
-          className="whitespace-nowrap text-center font-heading font-black text-[#F4F4F5] uppercase leading-none select-none pointer-events-none"
-          ref={textRef}>
-          EASTWIND
-        </span>
+      <div className="flex flex-col w-full mb-8 md:mb-12">
+        <GiantText text="EASTWIND" />
+        <GiantText text="MYANMAR " />
       </div>
 
       {/* Bottom Section */}
