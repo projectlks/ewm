@@ -354,7 +354,7 @@ export default function HomeFeaturedProjects(): React.JSX.Element {
             ======================= */}
         <div className="mt-20 flex justify-center lg:justify-start">
           <Link
-            href="/projects"
+            href="/solutions"
             className="inline-flex items-center justify-center px-12 py-4 rounded-full text-sm font-bold text-gray-900 bg-white border border-gray-200 hover:border-gray-900 hover:bg-gray-50 transition-all duration-300 w-full md:w-auto">
             View All Solutions Archive
             <svg
