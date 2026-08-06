@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function CustomerSupportSection(): React.JSX.Element {
   const supportFeatures: string[] = [
@@ -77,11 +78,13 @@ export default function CustomerSupportSection(): React.JSX.Element {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex-1 w-full relative">
             {/* Main Image */}
-            <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3] ">
-              <img
-                src="https://images.unsplash.com/photo-1596524430615-b46475ddff6e?auto=format&fit=crop&q=80&w=1000"
+            <div className="relative rounded-[2rem] overflow-hidden  aspect-[4/3] ">
+              <Image
+                src="/contactUS.jpg"
                 alt="24/7 Customer Support Team"
                 className="w-full h-full object-cover"
+                fill
+             
               />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div>
             </div>

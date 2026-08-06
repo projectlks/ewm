@@ -20,7 +20,8 @@ const strategicPartners: Partner[] = [
   { name: "VMware", logoUrl: "/logos/vmware.svg" },
   { name: "ZTE", logoUrl: "/logos/zte.svg" },
   { name: "Sangfor", logoUrl: "/logos/sangfor.png" },
-  { name: "EastWindRU", logoUrl: "/logos/ewru.svg" },
+  // { name: "EastWindRU", logoUrl: "/logos/ewru.svg" },
+  { name: "Huawei", logoUrl: "/logos/huawei.png" },
   { name: "CAIH", logoUrl: "/logos/CAIH-side.png" },
   { name: "WhaleColud", logoUrl: "/logos/whale-cloud.png" },
 ];

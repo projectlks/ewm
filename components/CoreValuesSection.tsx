@@ -1,5 +1,6 @@
 "use client"; // Interactive Animation (useState) သုံးထားသဖြင့် ထည့်ပေးရပါမည်
 
+import Image from "next/image";
 import React, { useState } from "react";
 
 interface CoreValue {
@@ -16,9 +17,9 @@ const coreValuesData: CoreValue[] = [
     description:
       "We prioritize our clients' needs, ensuring satisfaction, trust, and long-term success through dedicated support.",
 
-    // imageUrl:
-    imageUrl: "/3.jpg", // Professional Handshake / Trust
-    // "https://images.unsplash.com/photo-1453904300235-0f2f60b15b5d?auto=format&fit=crop&q=80&w=800",
+
+    imageUrl: "/core/1.jpg", 
+
   },
 
   {
@@ -26,8 +27,8 @@ const coreValuesData: CoreValue[] = [
     title: "Innovation",
     description:
       "Embracing cutting-edge technology and forward-thinking strategies to deliver modern, efficient solutions.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800", // Modern Tech / Innovation Team
+      imageUrl:
+        "/core/2.jpg", // Modern Tech / Innovation Team
   },
   {
     id: "integrity-quality",
@@ -35,7 +36,7 @@ const coreValuesData: CoreValue[] = [
     description:
       "Upholding the highest ethical standards while delivering premium, reliable, and standardized results.",
     imageUrl:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1920", // Professional Handshake / Trust
+      "/core/3.jpg", // Professional Handshake / Trust
   },
   {
     id: "sustainability",
@@ -43,7 +44,7 @@ const coreValuesData: CoreValue[] = [
     description:
       "Committed to environmentally friendly practices, renewable energy, and the long-term viability of our projects.",
     imageUrl:
-      "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&q=80&w=800", // Wind Turbines / Renewable Energy
+      "/core/4.jpg", // Wind Turbines / Renewable Energy
   },
   {
     id: "interoperability",
@@ -51,7 +52,7 @@ const coreValuesData: CoreValue[] = [
     description:
       "Designing systems and infrastructure that seamlessly integrate, communicate, and work together flawlessly.",
     imageUrl:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800", // Global Network Connections
+      "/core/5.jpg", // Global Network Connections
   },
 ];
 
@@ -122,14 +123,15 @@ export function CoreValuesSection(): React.JSX.Element {
                 onMouseEnter={() => setActiveId(value.id)}
                 onClick={() => setActiveId(value.id)}
                 // Flex box ၏ flex-grow ကို အသုံးပြု၍ အကျယ်အဝန်းကို အသက်သွင်းထားပါသည်
-                className={`relative overflow-hidden rounded-[2rem] transition-all duration-700 ease-in-out cursor-pointer group flex flex-col justify-end
+                className={`relative overflow-hidden rounded-[2rem] transition-all duration-700 ease-in-out relative cursor-pointer group flex flex-col justify-end
                   ${isActive ? "flex-[5]" : "flex-[1]"}
                 `}>
                 {/* Background Image */}
-                <img
+                <Image
                   src={value.imageUrl}
                   alt={value.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  fill
                 />
 
                 {/* Dark Overlay - Active ဖြစ်လျှင် ပိုမိုက်စေရန် */}

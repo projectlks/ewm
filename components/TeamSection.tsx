@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface TeamItem {
   id: string;
@@ -17,35 +18,35 @@ const teamData: TeamItem[] = [
     label: "SYSTEM DESIGN",
     title: "System Engineers",
     desc: "Architecture Planning. Detailed Requirements Analysis. Seamless System Integration.",
-    img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+    img: "/teams/1.jpg",
   },
   {
     id: "network",
     label: "NETWORK & OPS",
     title: "Network Engineers",
     desc: "Robust Network Infrastructure. System Operations. 24/7 SOC & NOC Monitoring.",
-    img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800",
+    img: "/teams/2.jpg",
   },
   {
     id: "pm",
     label: "PROJECT MANAGEMENT",
     title: "Project MANAGEMENT",
     desc: "Planning & Strategy. Resource & Budget management. Risk & Quality Control.",
-    img: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=800",
+    img: "/teams/3.jpg",
   },
   {
     id: "software",
     label: "DEVELOPMENT",
     title: "Software Team",
     desc: "Software Architects. Full-Stack Developers. UI/UX, QA, and DevOps experts.",
-    img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
+    img: "/teams/4.jpg",
   },
   {
     id: "logistics",
     label: "PROCUREMENT",
     title: "Logistics Team",
     desc: "End-to-end Procurement Management. Logistics & Warehouse. Risk & Compliance.",
-    img: "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&q=80&w=1200",
+    img: "/teams/5.jpg",
   },
 ];
 
@@ -73,11 +74,12 @@ const TeamCard = ({
         isEven ? "md:flex-row" : "md:flex-row-reverse"
       }`}>
       {/* 💡 ပုံအတွက် Tablet တွင် ၆၀% (md:w-[60%]) နေရာယူထားပါသည် */}
-      <div className="w-full md:w-[60%] lg:w-full overflow-hidden rounded-[1rem] aspect-[164/126] bg-gray-100 relative mb-0 lg:mb-6 shrink-0">
-        <img
+      <div className="w-full md:w-[60%] lg:w-full overflow-hidden rounded-2xl aspect-164/126 bg-gray-100 relative mb-0 lg:mb-6 shrink-0">
+        <Image
           src={team.img}
           alt={team.title}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          fill
         />
       </div>
 
