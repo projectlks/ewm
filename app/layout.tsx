@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -93,12 +94,12 @@ export default function RootLayout({
         <Cursor />
 
         <Analytics />
+        <SpeedInsights />
         <SplashScreen />
         <Navbar />
         <main className="container mx-auto scroll-smooth">{children}</main>
         <Footer />
 
-        {/* 💡 ဒီနေရာမှာ တစ်ခါတည်း ထည့်ထားလိုက်ပါ */}
         <ScrollToTop />
       </body>
     </html>
