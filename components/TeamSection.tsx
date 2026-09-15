@@ -52,40 +52,32 @@ const teamData: TeamItem[] = [
 
 const TeamCard = ({
   team,
-  globalIndex,
 }: {
   team: TeamItem;
   index: number;
   globalIndex: number;
 }) => {
-  const isEven = globalIndex % 2 === 0;
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      // Animation ကို တစ်ပြိုင်နက်တည်း အလုပ်လုပ်စေရန် delay ကို ဖယ်ရှားထားပါသည်
       transition={{ duration: 0.6 }}
-      className={`flex flex-col lg:flex-col group w-full gap-5 md:gap-8 lg:gap-0 items-center lg:items-start ${
-        isEven ? "md:flex-row" : "md:flex-row-reverse"
-      }`}>
-      <div className="w-full md:w-[60%] lg:w-full overflow-hidden rounded-2xl aspect-164/126 bg-gray-100 relative mb-0 lg:mb-6 shrink-0">
+      // Card တစ်ခုလုံးကို မူလအတိုင်း အပေါ်(ပုံ) အောက်(စာ) ပုံစံပဲ ပြန်ထားပါမည်
+      className="flex flex-col group w-full gap-5 items-center sm:items-start text-left"
+    >
+      {/* 💡 ပုံ၏ Aspect Ratio ကို Mobile တွင် [164/126] (အလျားလိုက်)၊ Tablet မှစ၍ [126/164] (အထောင်) ဖြစ်အောင် ပြောင်းထားပါသည် */}
+      <div className="w-full overflow-hidden rounded-2xl aspect-3/2 sm:aspect-126/164 bg-gray-100 relative mb-0 lg:mb-4 shrink-0">
         <Image
           src={team.img}
           alt={team.title}
-          // fill ပါပြီးသားဖြစ်၍ w-full h-full အား ဖြုတ်ထားပါသည်
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover "
           fill
-          // Performance အတွက် sizes Prop အား Grid Layout နှင့် အချိုးကျ ထည့်သွင်းထားပါသည်
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 33vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
 
-      <div className="flex flex-col px-2 w-full md:w-[40%] lg:w-full">
-        <span className="text-[10px] font-bold tracking-widest text-gray-400 mb-3 uppercase">
-          [ {team.label} ]
-        </span>
+      <div className="flex flex-col px-2 w-full">
         <h4 className="text-xl md:text-2xl lg:text-xl font-extrabold text-gray-900 mb-2 md:mb-3 tracking-tight">
           {team.title}
         </h4>
@@ -98,63 +90,42 @@ const TeamCard = ({
 };
 
 export default function TeamSection(): React.JSX.Element {
-  const leftTeams = teamData.slice(0, 2);
-  const middleTeam = teamData.slice(2, 3);
-  const rightTeams = teamData.slice(3, 5);
-
   return (
-    <section className="py-24 px-4 sm:px-6 overflow-hidden bg-white">
-      <div className="mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-6">
-          <div>
-            <span className="text-[10px] font-bold tracking-widest text-gray-400 mb-4 block uppercase">
-              [ THE TEAM ]
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight leading-tight mb-4">
-              Meet the minds.
-            </h2>
-            <p className="text-gray-500 text-sm md:text-base font-medium">
-              The driving force behind our turnkey infrastructure solutions.
-            </p>
-          </div>
-          <p className="text-[11px] font-bold tracking-widest text-blue-600 uppercase hidden md:block">
-            [ EXPERT MINDS ]
-          </p>
-        </motion.div>
+    <section className="py-24 px-4 sm:px-6 lg:px-0  ">
+      <div className="w-full relative grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-6 lg:gap-10 items-start mx-auto">
 
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-start justify-center">
-          <div className="flex-1 flex flex-col gap-12 w-full">
-            {leftTeams.map((team, i) => (
-              <TeamCard key={team.id} team={team} index={i} globalIndex={i} />
-            ))}
-          </div>
-
-          <div className="flex-1 flex flex-col gap-12 w-full lg:mt-48">
-            {middleTeam.map((team, i) => (
-              <TeamCard
-                key={team.id}
-                team={team}
-                index={i}
-                globalIndex={i + 2}
-              />
-            ))}
-          </div>
-
-          <div className="flex-1 flex flex-col gap-12 w-full">
-            {rightTeams.map((team, i) => (
-              <TeamCard
-                key={team.id}
-                team={team}
-                index={i}
-                globalIndex={i + 3}
-              />
-            ))}
-          </div>
+        {/* Left Column: Header */}
+        <div className="z-50 bg-white static lg:sticky lg:top-40 mb-8 lg:mb-0">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-start  text-left"
+          >
+            <div>
+              <span className="text-[10px] font-bold tracking-widest text-gray-400 mb-4 block uppercase">
+                THE TEAM
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight leading-tight mb-4">
+                Meet the minds.
+              </h2>
+              <p className="text-gray-500 text-sm md:text-base font-medium">
+                The driving force behind our turnkey infrastructure solutions.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+        {/* Right Column: Cards */}
+        <div className="lg:col-span-2  2xl:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-6 sm:gap-6 gap-y-10 sm:gap-y-12">
+          {teamData.map((team, index) => (
+            <TeamCard
+              key={team.id}
+              team={team}
+              index={index}
+              globalIndex={index}
+            />
+          ))}
         </div>
       </div>
     </section>
